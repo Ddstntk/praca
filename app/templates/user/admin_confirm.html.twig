@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Admin
+{% endblock %}
+{#{% block profilepic %}../../files/img/{{ user.idPicture }}.jpg{% endblock %}#}
+{% block body %}
+{% if user is defined and user|length %}
+<div class="card w-100 text-center" style="width: 18rem;">
+    <div class="card-body">
+        <h4 class="card-title">{{ 'admin.ask.delete.label'|trans }}</h4>
+        <img class="w-25 ml-auto mr-auto mb-5" src="{{  asset(download_photos_directory ~ '/' ~ user. photo) }}" alt="{{ user.photo }}">
+
+        <h6 class="card-title">{{ user.name }} {{ user.surname }}</h6>
+        <h6 class="card-title">{{ user.birthDate }}</h6>
+        <p class="card-text">{{ user.email }}</p>
+        <p class="card-text">{{ 'user_id.label'|trans }} {{ user.PK_idUsers }}</p>
+        <p class="card-text">{{ 'label.access'|trans }} {{ user.role_id }}</p>
+
+        <a class="btn btn-danger mt-2" href="{{ url('admin_user_delete', {id: user.PK_idUsers }) }}" title="{{ 'yes'|trans }} "
+
+        >
+            {{ 'yes.label'|trans }}
+
+        </a>
+        <a class="btn btn-primary mt-2" href="{{ url('admin_users') }}" title="{{ 'no'|trans }} "
+        >
+            {{ 'no.label'|trans }}
+
+        </a>
+    </div>
+</div>
+{% else %}
+<div>
+    {{ 'no.user.label'|trans }}
+</div>
+{% endif %}
+{% endblock %}

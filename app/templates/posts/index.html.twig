@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block body %}
+    {% include 'default/_paginator.html.twig' with {
+        paginator: paginator,
+        route_name: 'posts_index_paginated',
+    } %}
+
+    {% form_theme form with ['bootstrap_4_horizontal_layout.html.twig', 'form/form_errors.html.twig'] %}
+    {{ form_start(form, { method: 'post', action: url('posts_add') }) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-success mb-2" />
+    {{ form_end(form) }}
+
+    {% if paginator.data is defined and paginator.data|length %}
+
+                {#<div class="form-group">#}
+                    {#<label for="comment"><h2>Posty:</h2></label>#}
+                    {#<textarea class="form-control" rows="5" style="resize: none;" id="comment" placeholder="Napisz cos"></textarea>#}
+                    {#<button class="btn mt-3">Dodaj post</button>#}
+                {#</div>#}
+                {% for row in paginator.data %}
+                    <div class="card w-100" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ row.name }} {{ row.surname }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ row.created_at }}</h6>
+                            <p class="card-text">{{ row.content }}</p>
+                            <a href="{{ url('comments_index_paginated', {postId: row.PK_idPosts }) }}" title="{{ 'comments.index.label'|trans }}">
+                                {{ 'comments.index.label'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+    {% else %}
+        <div>
+            List is empty!
+        </div>
+    {% endif %}
+    {#<div class="category">#}
+        {#{{ form_row(form.message-default) }}#}
+    {#</div>#}
+
+{% endblock %}

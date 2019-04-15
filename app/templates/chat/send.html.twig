@@ -1,0 +1,16 @@
+{#href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
+<link
+        href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+<link
+        href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
+<link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+<script src="{{ asset('js/resetForm.js') }}"></script>
+    {{ form_start(form, { method: 'post', action: url('messages_send', {'id': id}) }) }}
+    {{ form_widget(form) }}
+    <input id = "chatInput" type="submit" value="{{ 'action.save'|trans }}" class="btn btn-primary btn-lg btn-block w-100" onclick="resetForm()"
+            {% if id is null %}
+                disabled
+            {% endif %}
+    />
+    {{ form_end(form) }}

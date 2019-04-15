@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title.conversation_new'|trans }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'post.conversation_new'|trans }}</h1>
+    {% form_theme form with ['bootstrap_4_horizontal_layout.html.twig', 'form/form_errors.html.twig'] %}
+    {{ form_start(form, { method: 'post', action: url('conversation_new') }) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="{{ 'action.addChat'|trans }}" class="btn btn-success" />
+    {{ form_end(form) }}
+{% endblock %}

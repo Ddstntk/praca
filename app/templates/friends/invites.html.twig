@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Invites
+{% endblock %}
+
+{% block body %}
+    {% include 'default/_paginator.html.twig' with {
+        paginator: paginator,
+        route_name: 'friends_index_paginated',
+    } %}
+
+    {% if paginator.data is defined and paginator.data|length %}
+
+        <div class="row">
+            {% for row in paginator.data %}
+                <div class="card" style="width: 10rem; margin:15px;">
+                    <img class="card-img-top" src="{{  asset(download_photos_directory ~ '/' ~ row. photo) }}" alt="{{ row.photo }}"
+                         alt="Profile image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ row.name }} {{ row.surname }}</h5>
+                        <p class="card-text">{{ row.birthDate }}</p>
+
+                        <a class="btn btn-secondary w-100 mb-2" href="{{ url('user_view', {id: row.PK_idUsers }) }}" title="{{ 'user.view.label'|trans }}">
+                            {{ 'user.view.label'|trans }}
+                        </a>
+                        <a class="btn btn-success w-100" href="{{ url('friend_add', {friendId: row.PK_idUsers }) }}" title="{{ 'friend.accept.label'|trans }}">
+                            {{ 'friend.accept.label'|trans }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <div>
+            List is empty!
+        </div>
+    {% endif %}
+{% endblock %}

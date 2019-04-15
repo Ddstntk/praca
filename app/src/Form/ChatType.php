@@ -1,0 +1,91 @@
+<?php
+/**
+ * PHP Version 5.6
+ * Chat type.
+ *
+ * @category  Social_Network
+ *
+ * @author    Konrad Szewczuk <konrad3szewczuk@gmail.com>
+ *
+ * @copyright 2018 Konrad Szewczuk
+ *
+ * @license   https://opensource.org/licenses/MIT MIT license
+ *
+ * @link      cis.wzks.uj.edu.pl/~16_szewczuk
+ */
+namespace Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+
+//use Validator\Constraints as CustomAssert;
+
+/**
+ * Class ChatType
+ *
+ * @category  Social_Network
+ *
+ * @author    Konrad Szewczuk <konrad3szewczuk@gmail.com>
+ *
+ * @copyright 2018 Konrad Szewczuk
+ *
+ * @license   https://opensource.org/licenses/MIT MIT license
+ *
+ * @link      cis.wzks.uj.edu.pl/~16_szewczuk
+ */
+class ChatType extends AbstractType
+{
+
+    /**
+     * Form builder
+     *
+     * @param FormBuilderInterface $builder Form builder
+     * @param array                $options Form options
+     *
+     * @return nothing
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add(
+            'selectUsers',
+            ChoiceType::class,
+            array(
+                'label' => 'select.users.label',
+            'multiple' => true,
+            'expanded' => true,
+            'choices'  => $options['data'],
+            )
+        );
+    }
+
+    /**
+     * Options configuration
+     *
+     * @param OptionsResolver $resolver Options resolver
+     *
+     * @return noting
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(
+            [
+                'validation_groups' => 'conversation-default',
+            ]
+        );
+    }
+
+    /**
+     * Get prefix
+     *
+     * @return null|string
+     */
+    public function getBlockPrefix()
+    {
+        return 'conversation_type';
+    }
+}

@@ -1,0 +1,315 @@
+
+FILE: /home/epi/16_szewczuk/app/src/Provider/UserProvider.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Provider/CustomUser.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+----------------------------------------------------------------------
+ 12 | WARNING | PHP version not specified
+ 94 | WARNING | Line exceeds 85 characters; contains 177 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/console.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 3 WARNINGS AFFECTING 3 LINES
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+ 20 | WARNING | Line exceeds 85 characters; contains 130 characters
+ 26 | WARNING | Line exceeds 85 characters; contains 86 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Service/FileUploader.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/controllers.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+ 28 | WARNING | Line exceeds 85 characters; contains 116 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Validator/Constraints/UniqueEmailValidator.php
+----------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Validator/Constraints/UniqueEmail.php
+-------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+-------------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+-------------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Utils/Paginator.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 6 WARNINGS AFFECTING 6 LINES
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+ 60 | WARNING | Line exceeds 85 characters; contains 89 characters
+ 61 | WARNING | Line exceeds 85 characters; contains 105 characters
+ 63 | WARNING | Line exceeds 85 characters; contains 92 characters
+ 78 | WARNING | Line exceeds 85 characters; contains 117 characters
+ 90 | WARNING | Line exceeds 85 characters; contains 113 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Repository/PhotosRepository.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Repository/PostsRepository.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+ 77 | WARNING | Line exceeds 85 characters; contains 103 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Repository/UserRepository.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 3 WARNINGS AFFECTING 3 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+ 204 | WARNING | Line exceeds 85 characters; contains 90 characters
+ 256 | WARNING | Line exceeds 85 characters; contains 106 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Repository/ChatRepository.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 5 WARNINGS AFFECTING 5 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+  95 | WARNING | Line exceeds 85 characters; contains 96 characters
+ 183 | WARNING | Line exceeds 85 characters; contains 92 characters
+ 264 | WARNING | Line exceeds 85 characters; contains 101 characters
+ 266 | WARNING | Line exceeds 85 characters; contains 96 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Repository/FriendsRepository.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 3 WARNINGS AFFECTING 3 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+ 201 | WARNING | Line exceeds 85 characters; contains 95 characters
+ 202 | WARNING | Line exceeds 85 characters; contains 95 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Repository/CommentsRepository.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Controller/UserController.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 5 WARNINGS AFFECTING 5 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+  51 | WARNING | Line exceeds 85 characters; contains 90 characters
+  76 | WARNING | Line exceeds 85 characters; contains 98 characters
+ 164 | WARNING | Line exceeds 85 characters; contains 88 characters
+ 203 | WARNING | Line exceeds 85 characters; contains 95 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Controller/PhotosController.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+ 64 | WARNING | Line exceeds 85 characters; contains 89 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Controller/FriendsController.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 7 WARNINGS AFFECTING 7 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+  44 | WARNING | Line exceeds 85 characters; contains 95 characters
+  45 | WARNING | Line exceeds 85 characters; contains 86 characters
+  46 | WARNING | Line exceeds 85 characters; contains 92 characters
+  47 | WARNING | Line exceeds 85 characters; contains 95 characters
+ 142 | WARNING | Line exceeds 85 characters; contains 88 characters
+ 205 | WARNING | Line exceeds 85 characters; contains 88 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Controller/AdminController.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+ 212 | WARNING | Line exceeds 85 characters; contains 91 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Controller/CommentsController.php
+---------------------------------------------------------------------------------------
+FOUND 1 ERROR AND 2 WARNINGS AFFECTING 3 LINES
+---------------------------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+  98 | ERROR   | Arguments with default values must be at the end of the argument list
+ 125 | WARNING | Line exceeds 85 characters; contains 123 characters
+---------------------------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Controller/ChatController.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 5 WARNINGS AFFECTING 5 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+  50 | WARNING | Line exceeds 85 characters; contains 88 characters
+ 113 | WARNING | Line exceeds 85 characters; contains 86 characters
+ 134 | WARNING | Line exceeds 85 characters; contains 87 characters
+ 198 | WARNING | Line exceeds 85 characters; contains 93 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Controller/AuthController.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 4 WARNINGS AFFECTING 4 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+  67 | WARNING | Line exceeds 85 characters; contains 88 characters
+ 103 | WARNING | Line exceeds 85 characters; contains 95 characters
+ 115 | WARNING | Line exceeds 85 characters; contains 97 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Controller/PostsController.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+ 119 | WARNING | Line exceeds 85 characters; contains 97 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/app.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 6 WARNINGS AFFECTING 6 LINES
+----------------------------------------------------------------------
+ 12 | WARNING | PHP version not specified
+ 57 | WARNING | Line exceeds 85 characters; contains 96 characters
+ 78 | WARNING | Line exceeds 85 characters; contains 104 characters
+ 79 | WARNING | Line exceeds 85 characters; contains 108 characters
+ 80 | WARNING | Line exceeds 85 characters; contains 104 characters
+ 81 | WARNING | Line exceeds 85 characters; contains 108 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/PswdType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 14 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/MessageType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/PhotoType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/SignupType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 3 WARNINGS AFFECTING 3 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+ 114 | WARNING | Line exceeds 85 characters; contains 116 characters
+ 115 | WARNING | Line exceeds 85 characters; contains 108 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/CommentType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/LoginType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/EditType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 3 WARNINGS AFFECTING 3 LINES
+----------------------------------------------------------------------
+  11 | WARNING | PHP version not specified
+ 103 | WARNING | Line exceeds 85 characters; contains 116 characters
+ 104 | WARNING | Line exceeds 85 characters; contains 108 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/ChatType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/PostType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+
+FILE: /home/epi/16_szewczuk/app/src/Form/AccessType.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+----------------------------------------------------------------------
+ 11 | WARNING | PHP version not specified
+----------------------------------------------------------------------
+
+Time: 2.49 secs; Memory: 9.5Mb
+

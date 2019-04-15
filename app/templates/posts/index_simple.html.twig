@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        {#<div class="form-group">#}
+        {#<label for="comment"><h2>Posty:</h2></label>#}
+        {#<textarea class="form-control" rows="5" style="resize: none;" id="comment" placeholder="Napisz cos"></textarea>#}
+        {#<button class="btn mt-3">Dodaj post</button>#}
+        {#</div>#}
+        {% for row in posts %}
+            <div class="card w-100" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ row.name }} {{ row.surname }}, {{ row.FK_idUsers }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">crt: {{ row.created_at }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">mod: {{ row.modified_at }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ row.PK_idPosts }}</h6>
+
+                    <p class="card-text">{{ row.content }}</p>
+                    <a href="{{ url('admin_comments', {postId: row.PK_idPosts }) }}" title="{{ 'comments.index.label'|trans }}">
+                        {{ 'comments.index.label'|trans }}
+                    </a>
+                    <a class="btn btn-danger w-100 mb-2" href="{{ url('admin_posts_delete', {id: row.PK_idPosts }) }}" title="{{ 'comments.delete_admin.label'|trans }}">
+                        {{ 'comments.delete_admin.label'|trans }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}

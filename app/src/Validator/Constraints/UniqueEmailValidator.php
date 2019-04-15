@@ -1,0 +1,62 @@
+<?php
+/**
+ * PHP Version 5.6
+ * Unique Email validator.
+ *
+ * @category  Social_Network
+ *
+ * @author    Konrad Szewczuk <konrad3szewczuk@gmail.com>
+ *
+ * @copyright 2018 Konrad Szewczuk
+ *
+ * @license   https://opensource.org/licenses/MIT MIT license
+ *
+ * @link      cis.wzks.uj.edu.pl/~16_szewczuk
+ */
+namespace Validator\Constraints;
+
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
+
+/**
+ * Class UniqueEmailValidator.
+ *
+ * @category  Social_Network
+ *
+ * @author    Konrad Szewczuk <konrad3szewczuk@gmail.com>
+ *
+ * @copyright 2018 Konrad Szewczuk
+ *
+ * @license   https://opensource.org/licenses/MIT MIT license
+ *
+ * @link      cis.wzks.uj.edu.pl/~16_szewczuk
+ */
+class UniqueEmailValidator extends ConstraintValidator
+{
+
+    /**
+     * Validate user email uniqueness
+     *
+     * @param mixed      $value      Value
+     * @param Constraint $constraint Constraint
+     *
+     * @return null
+     */
+    public function validate($value, Constraint $constraint)
+    {
+        if (!$constraint->repository) {
+            return;
+        }
+
+        $result = $constraint->repository->findForUniqueness(
+            $value,
+            $constraint->email
+        );
+
+        if ($result && count($result)) {
+            $this->context->buildViolation($constraint->message)
+                ->setParameter('{{ email }}', $value)
+                ->addViolation();
+        }
+    }
+}

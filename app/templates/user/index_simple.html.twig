@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="row">
+    {% for row in users %}
+        <div class="card" style="width: 10rem; margin:15px;">
+            {#<img class="card-img-top" src="data:image/png;base64,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"#}
+            {#alt="Profile image">#}
+            <img height="200px" style="" class="card-img-top" src="{{  asset(download_photos_directory ~ '/' ~ row. photo) }}" alt="{{ row.photo }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ row.name }} {{ row.surname }}</h5>
+                <p class="card-text">Id: {{ row.PK_idUsers }}</p>
+                <p class="card-text">{{ row.email }}</p>
+                <p class="card-text">{{ row.birthDate }}</p>
+                <p class="card-text">{{ row.birthDate }}</p>
+
+
+                <a class="btn btn-info w-100 mb-2 mt-2" href="{{ url('admin_user_edit', {id: row.PK_idUsers }) }}" title="{{ 'user.edit.admin'|trans }}">
+                    {{ 'user.edit.admin'|trans }}
+                </a>
+
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

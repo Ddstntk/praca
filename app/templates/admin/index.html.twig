@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin Comments
+{% endblock %}
+
+{% block body %}
+    <a class="btn btn-danger w-100 mb-2" href="{{ url('admin_users') }}" title="{{ 'manage.users.label'|trans }}">
+        {{ 'manage.users.label'|trans }}
+    </a>
+    <a class="btn btn-danger w-100 mb-2" href="{{ url('admin_posts') }}" title="{{ 'manage.posts.label'|trans }}">
+        {{ 'manage.posts.label'|trans }}
+    </a>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Comments
+{% endblock %}
+
+{% block body %}
+    {% include 'default/_paginator.html.twig' with {
+        paginator: paginator,
+        route_name: 'comments_index_paginated',
+    } %}
+    <div class="card w-100" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ xd.name }} {{ xd.surname }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ xd.created_at }}</h6>
+            <p class="card-text">{{ xd.content }}</p>
+        </div>
+    </div>
+
+    {% if paginator.data is defined and paginator.data|length %}
+        <div class="customMyApp offset-md-2">
+            <div name="feed" class="col-7 offset-md-1">
+
+                {% for row in paginator.data %}
+                    <div class="card w-100" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ row.name }} {{ row.surname }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ row.created_at }}</h6>
+                            <p class="card-text">{{ row.content }}</p>
+                            <a class="btn btn-danger w-100 mb-2" href="{{ url('admin_comments_delete', {id: row.PK_idComments }) }}" title="{{ 'comment.delete.admin'|trans }}">
+                                {{ 'comment.delete.admin'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div>
+            List is empty!
+        </div>
+    {% endif %}
+
+{% endblock %}

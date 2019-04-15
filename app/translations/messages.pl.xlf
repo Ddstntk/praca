@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="pl" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="user.profile.label">
+                <source>user.profile.label</source>
+                <target>Twój profil</target>
+            </trans-unit>
+            <trans-unit id="user.edit.label">
+                <source>user.edit.label</source>
+                <target>Ustawienia konta</target>
+            </trans-unit>
+            <trans-unit id="user.edit">
+                <source>user.edit</source>
+                <target>Edytuj konto</target>
+            </trans-unit>
+            <trans-unit id="photo.add.label">
+                <source>photo.add.label</source>
+                <target>Zmień zdjęcie profilowe</target>
+            </trans-unit>
+            <trans-unit id="auth.logout.label">
+                <source>auth.logout.label</source>
+                <target>Wyloguj się</target>
+            </trans-unit>
+            <trans-unit id="post.index.label">
+                <source>post.index.label</source>
+                <target>Posty</target>
+            </trans-unit>
+            <trans-unit id="friend.index.label">
+                <source>friend.index.label</source>
+                <target>Znajomi</target>
+            </trans-unit>
+            <trans-unit id="invite.index.label">
+                <source>invite.index.label</source>
+                <target>Zaproszenia</target>
+            </trans-unit>
+            <trans-unit id="user.index.label">
+                <source>user.index.label</source>
+                <target>Użytkownicy</target>
+            </trans-unit>
+            <trans-unit id="chat.index.label">
+                <source>chat.index.label</source>
+                <target>Zmień chat</target>
+            </trans-unit>
+            <trans-unit id="action.save">
+                <source>action.save</source>
+                <target>Wyślij</target>
+            </trans-unit>
+            <trans-unit id="label.nav.next">
+                <source>label.nav.next</source>
+                <target>Następna strona</target>
+            </trans-unit>
+            <trans-unit id="label.nav.prev">
+                <source>label.nav.prev</source>
+                <target>Poprzednia strona</target>
+            </trans-unit>
+            <trans-unit id="labels.nav.prev">
+                <source>labels.nav.prev</source>
+                <target>Poprzednia strona</target>
+            </trans-unit>
+            <trans-unit id="label.content">
+                <source>label.content</source>
+                <target>Treść</target>
+            </trans-unit>
+            <trans-unit id="label.visibility">
+                <source>label.visibility</source>
+                <target>Widoczność</target>
+            </trans-unit>
+            <trans-unit id="label.friends">
+                <source>label.friends</source>
+                <target>Znajomi</target>
+            </trans-unit>
+            <trans-unit id="label.everyone">
+                <source>label.everyone</source>
+                <target>Wszyscy</target>
+            </trans-unit>
+            <trans-unit id="comments.index.label">
+                <source>comments.index.label</source>
+                <target>Komentarze</target>
+            </trans-unit>
+            <trans-unit id="user.view.label">
+                <source>user.view.label</source>
+                <target>Zobacz profil</target>
+            </trans-unit>
+            <trans-unit id="friend.delete.label">
+                <source>friend.delete.label</source>
+                <target>Usuń znajomość</target>
+            </trans-unit>
+            <trans-unit id="friend.accept.label">
+                <source>friend.accept.label</source>
+                <target>Zaakceptuj</target>
+            </trans-unit>
+            <trans-unit id="friend.invite.label">
+                <source>friend.invite.label</source>
+                <target>Zaproś</target>
+            </trans-unit>
+            <trans-unit id="chat.add.label">
+                <source>chat.add.label</source>
+                <target>Dodaj nowy czat</target>
+            </trans-unit>
+            <trans-unit id="chat.all.label">
+                <source>chat.all.label</source>
+                <target>Twoje konwersacje</target>
+            </trans-unit>
+            <trans-unit id="post.conversation_new">
+                <source>post.conversation_new</source>
+                <target>Dodaj użytkowników do konwersacji</target>
+            </trans-unit>
+            <trans-unit id="select.users.label">
+                <source>select.users.label</source>
+                <target>Wybierz znajomych</target>
+            </trans-unit>
+            <trans-unit id="action.addChat">
+                <source>action.addChat</source>
+                <target>Dodaj konwersację</target>
+            </trans-unit>
+            <trans-unit id="label.name">
+                <source>label.name</source>
+                <target>Imię</target>
+            </trans-unit>
+            <trans-unit id="label.surname">
+                <source>label.surname</source>
+                <target>Nazwisko</target>
+            </trans-unit>
+            <trans-unit id="label.email">
+                <source>label.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Hasło</target>
+            </trans-unit>
+            <trans-unit id="label.repeat.password">
+                <source>label.repeat.password</source>
+                <target>Powtórz hasło</target>
+            </trans-unit>
+            <trans-unit id="title.photo_add">
+                <source>title.photo_add</source>
+                <target>Zmień zdjęcie</target>
+            </trans-unit>
+            <trans-unit id="label.photo">
+                <source>label.photo</source>
+                <target>Wybierz z dysku</target>
+            </trans-unit>
+            <trans-unit id="label.actions">
+                <source>label.actions</source>
+                <target>Akcje</target>
+            </trans-unit>
+            <trans-unit id="label.back_to_list">
+                <source>label.back_to_list</source>
+                <target>Powrót</target>
+            </trans-unit>
+            <trans-unit id="manage.users.label">
+                <source>manage.users.label</source>
+                <target>Zarządzaj użytkownikami</target>
+            </trans-unit>
+            <trans-unit id="manage.posts.label">
+                <source>manage.posts.label</source>
+                <target>Zarządzaj postami i komentarzami</target>
+            </trans-unit>
+            <trans-unit id="title.auth_login">
+                <source>title.auth_login</source>
+                <target>Logowanie</target>
+            </trans-unit>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Zaloguj</target>
+            </trans-unit>
+            <trans-unit id="user.add.label">
+                <source>user.add.label</source>
+                <target>Zarejestruj się!</target>
+            </trans-unit>
+            <trans-unit id="title.post_add">
+                <source>title.post_add</source>
+                <target>Rejestracja</target>
+            </trans-unit>
+            <trans-unit id="label.birthdate">
+                <source>label.birthdate</source>
+                <target>Data urodzin</target>
+            </trans-unit>
+            <trans-unit id="title.auth_signup">
+                <source>title.auth_signup</source>
+                <target>Logowanie</target>
+            </trans-unit>
+            <trans-unit id="user.delete.admin">
+                <source>user.delete.admin</source>
+                <target>Usuń</target>
+            </trans-unit>
+            <trans-unit id="comments.delete_admin.label">
+                <source>comments.delete_admin.label</source>
+                <target>Usuń</target>
+            </trans-unit>
+            <trans-unit id="comment.delete.admin">
+                <source>comment.delete.admin</source>
+                <target>Usuń</target>
+            </trans-unit>
+            <trans-unit id="admin.button.label">
+                <source>admin.button.label</source>
+                <target>Panel administratora</target>
+            </trans-unit>
+            <trans-unit id="label.access">
+                <source>label.access</source>
+                <target>Dostęp</target>
+            </trans-unit>
+            <trans-unit id="user_id.label">
+                <source>user_id.label</source>
+                <target>Id użytkownika</target>
+            </trans-unit>
+            <trans-unit id="admin.edit.label">
+                <source>admin.edit.label</source>
+                <target>Edytuj (admin)</target>
+            </trans-unit>
+            <trans-unit id="label.admin">
+                <source>label.admin</source>
+                <target>Administrator</target>
+            </trans-unit>
+            <trans-unit id="label.user">
+                <source>label.user</source>
+                <target>Zwykły użytkownik</target>
+            </trans-unit>
+            <trans-unit id="message.element_successfully_added">
+                <source>message.element_successfully_added</source>
+                <target>Zmiany wprowadzone pomyślnie!</target>
+            </trans-unit>
+            <trans-unit id="choose.label">
+                <source>choose.label</source>
+                <target>Wybierz</target>
+            </trans-unit>
+            <trans-unit id="admin.delete.label">
+                <source>admin.delete.label</source>
+                <target>Usuń osobę</target>
+            </trans-unit>
+            <trans-unit id="message.account_successfully_edited">
+                <source>message.account_successfully_edited</source>
+                <target>Ustawienia konta zmienione</target>
+            </trans-unit>
+            <trans-unit id="email.exists.label">
+                <source>email.exists.label</source>
+                <target>Email jest już w użyciu</target>
+            </trans-unit>
+            <trans-unit id='no.user.label'>
+                <source>no.user.label</source>
+                <target>Nie znaleziono użytkownika!</target>
+            </trans-unit>
+            <trans-unit id='user.delete.confirm'>
+                <source>user.delete.confirm</source>
+                <target>Usunąć użytkownika</target>
+            </trans-unit>
+            <trans-unit id='message.user_successfully_edited'>
+                <source>message.user_successfully_edited</source>
+                <target>Użytkownik edytowany pomyślnie</target>
+            </trans-unit>
+            <trans-unit id='message.signup_success'>
+                <source>message.signup_success</source>
+                <target>Zarejestrowano pomyślnie</target>
+            </trans-unit>
+            <trans-unit id='message.message_sent'>
+                <source>message.message_sent</source>
+                <target>Wysłano</target>
+            </trans-unit>
+            <trans-unit id='message.chat_created'>
+                <source>message.chat_created</source>
+                <target>Konwersacja utworzona pomyślnie</target>
+            </trans-unit>
+            <trans-unit id='message.comment_successfully_added'>
+                <source>message.comment_successfully_added</source>
+                <target>Komentarz dodany</target>
+            </trans-unit>
+            <trans-unit id='message.user_not_found '>
+                <source>message.user_not_found</source>
+                <target>Użytkownik o podanym id nie istnieje</target>
+            </trans-unit>
+            <trans-unit id='message.user_successfully_deleted'>
+                <source>message.user_successfully_deleted</source>
+                <target>Użytkownik pomyślnie usunięty</target>
+            </trans-unit>
+            <trans-unit id='admin.ask.delete.label'>
+                <source>admin.ask.delete.label</source>
+                <target>Na pewno chcesz usunąć tego użytkownika?</target>
+            </trans-unit>
+            <trans-unit id='yes.label'>
+                <source>yes.label</source>
+                <target>Tak</target>
+            </trans-unit>
+            <trans-unit id='no.label'>
+                <source>no.label</source>
+                <target>Nie</target>
+            </trans-unit>
+            <trans-unit id='user.edit.admin'>
+                <source>user.edit.admin</source>
+                <target>Edytuj</target>
+            </trans-unit>
+            <trans-unit id='title.conversation_new'>
+                <source>title.conversation_new</source>
+                <target>Nowa konwersacja</target>
+            </trans-unit>
+            <trans-unit id='Year'>
+                <source>Year</source>
+                <target>Rok</target>
+            </trans-unit>
+            <trans-unit id='Month'>
+                <source>Month</source>
+                <target>Miesiąc</target>
+            </trans-unit>
+            <trans-unit id='Day'>
+                <source>Day</source>
+                <target>Dzień</target>
+            </trans-unit>
+            <trans-unit id='comment.comments_add'>
+                <source>comment.comments_add</source>
+                <target>Dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id='change.password.label'>
+                <source>change.password.label</source>
+                <target>Zmień hasło</target>
+            </trans-unit>
+            <trans-unit id='message.user_invited'>
+                <source>message.user_invited</source>
+                <target>Wysłano zaproszenie</target>
+            </trans-unit>
+            <trans-unit id='admin.user.confirm.label'>
+                <source>admin.user.confirm.label</source>
+                <target>Usuń użytkownika</target>
+            </trans-unit>
+            <trans-unit id='yes'>
+                <source>yes</source>
+                <target>Tak</target>
+            </trans-unit>
+            <trans-unit id='no'>
+                <source>no</source>
+                <target>Nie</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

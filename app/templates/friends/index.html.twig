@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Friends
+{% endblock %}
+
+{% block body %}
+    {% include 'default/_paginator.html.twig' with {
+        paginator: paginator,
+        route_name: 'friends_index_paginated',
+    } %}
+
+    {% if paginator.data is defined and paginator.data|length %}
+
+        <div class="row">
+            {% for row in paginator.data %}
+                <div class="card" style="width: 10rem; margin:15px;">
+                    <img class="card-img-top" src="{{  asset(download_photos_directory ~ '/' ~ row. photo) }}" alt="{{ row.photo }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ row.name }} {{ row.surname }}</h5>
+                        <p class="card-text">{{ row.birthDate }}</p>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <p class="card-text">{{ 'label.access'|trans }}: {{ row.role_id }}</p>
+                        {% endif %}
+                        <a class="btn btn-secondary w-100 mb-2" href="{{ url('user_view', {id: row.PK_idUsers }) }}" title="{{ 'user.view.label'|trans }}">
+                            {{ 'user.view.label'|trans }}
+                        </a>
+                        <a class="btn btn-danger w-100 mb-2" href="{{ url('friends_delete', {id: row.PK_idUsers }) }}" title="{{ 'friend.delete.label'|trans }}">
+                            {{ 'friend.delete.label'|trans }}
+                        </a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-info" href="{{ url('admin_user_edit', {id: row.PK_idUsers }) }}" title="{{ 'admin.edit.label'|trans }}">
+                                {{ 'admin.edit.label'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <div>
+            List is empty!
+        </div>
+    {% endif %}
+{% endblock %}

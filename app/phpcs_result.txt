@@ -1,0 +1,58 @@
+
+FILE: /home/h4ck3r/PhpstormProjects/Pro/app/src/Controller/UserController.php
+-----------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+-----------------------------------------------------------------------------
+ 80 | WARNING | Line exceeds 85 characters; contains 98 characters
+-----------------------------------------------------------------------------
+
+
+FILE: /home/h4ck3r/PhpstormProjects/Pro/app/src/Controller/ChatController.php
+-----------------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+-----------------------------------------------------------------------------
+ 139 | WARNING | Line exceeds 85 characters; contains 87 characters
+ 214 | WARNING | Line exceeds 85 characters; contains 93 characters
+-----------------------------------------------------------------------------
+
+
+FILE: /home/h4ck3r/PhpstormProjects/Pro/app/src/Controller/PostsController.php
+------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+------------------------------------------------------------------------------
+ 120 | WARNING | Line exceeds 85 characters; contains 97 characters
+------------------------------------------------------------------------------
+
+
+FILE: /home/h4ck3r/PhpstormProjects/Pro/app/src/app.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 4 WARNINGS AFFECTING 4 LINES
+----------------------------------------------------------------------
+ 86 | WARNING | Line exceeds 85 characters; contains 97 characters
+ 88 | WARNING | Line exceeds 85 characters; contains 101 characters
+ 90 | WARNING | Line exceeds 85 characters; contains 97 characters
+ 92 | WARNING | Line exceeds 85 characters; contains 101 characters
+----------------------------------------------------------------------
+
+
+FILE: /home/h4ck3r/PhpstormProjects/Pro/app/src/Repository/ChatRepository.php
+-----------------------------------------------------------------------------
+FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
+-----------------------------------------------------------------------------
+ 98 | WARNING | Line exceeds 85 characters; contains 87 characters
+-----------------------------------------------------------------------------
+
+
+FILE: /home/h4ck3r/PhpstormProjects/Pro/app/src/Utils/Paginator.php
+----------------------------------------------------------------------
+FOUND 0 ERRORS AND 5 WARNINGS AFFECTING 5 LINES
+----------------------------------------------------------------------
+ 61 | WARNING | Line exceeds 85 characters; contains 89 characters
+ 62 | WARNING | Line exceeds 85 characters; contains 105 characters
+ 64 | WARNING | Line exceeds 85 characters; contains 92 characters
+ 79 | WARNING | Line exceeds 85 characters; contains 117 characters
+ 91 | WARNING | Line exceeds 85 characters; contains 113 characters
+----------------------------------------------------------------------
+
+Time: 653ms; Memory: 9.5Mb
+

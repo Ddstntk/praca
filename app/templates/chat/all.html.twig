@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Chats
+{% endblock %}
+
+{% block body %}
+
+    <h1>
+        {{ 'chat.all.label'|trans }}
+    </h1>
+    <a class="btn btn-primary mb-2" href="{{ url('conversation_new') }}" title="{{ 'chat.add.label'|trans }}">
+        {{ 'chat.add.label'|trans }}
+    </a>
+    {% if chats is defined and chats|length %}
+        <ul>
+        {% for row in chats %}
+            <li><a class="btn btn-outline-dark mb-2" href="{{ url('set_chat', {id: row[0].FK_idConversations}) }}"
+                        {#onclick="changeIframes({{ row[0].FK_idConversations }})"#}
+                >
+            {% for items in row %}
+                {% if items.PK_idUsers != user %}
+                {{ items.name }} {{ items.surname }},
+                {% endif %}
+            {% endfor %}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <div>
+            List is empty!
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,145 @@
+<?php
+/**
+ * PHP Version 5.6
+ * Admin controller.
+ *
+ * @category  Social_Network
+ * @package   Social
+ * @author    Konrad Szewczuk <konrad3szewczuk@gmail.com>
+ * @copyright 2018 Konrad Szewczuk
+ * @license   https://opensource.org/licenses/MIT MIT license
+ * @link      cis.wzks.uj.edu.pl/~16_szewczuk
+ */
+namespace Controller;
+
+
+use Form\LoginType;
+use Silex\Application;
+use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Repository\UserRepository;
+use Form\SignupType;
+use Service\userTokenService;
+/**
+ * Class AuthController.
+ *
+ * @category  Social_Network
+ * @package   Controller
+ * @author    Konrad Szewczuk <konrad3szewczuk@gmail.com>
+ * @copyright 2018 Konrad Szewczuk
+ * @license   https://opensource.org/licenses/MIT MIT license
+ * @link      cis.wzks.uj.edu.pl/~16_szewczuk
+ */
+class AuthController implements ControllerProviderInterface
+{
+    /**
+     * Routing settings
+     *
+     * @param Application $app Application
+     *
+     * @return mixed|\Silex\ControllerCollection
+     */
+    public function connect(Application $app)
+    {
+        $controller = $app['controllers_factory'];
+        $controller->match('/login', [$this, 'loginAction'])
+            ->method('GET|POST')
+            ->bind('auth_login');
+        $controller->get('/logout', [$this, 'logoutAction'])
+            ->bind('auth_logout');
+        $controller->get('/signup', [$this, 'signupAction'])
+            ->method('POST|GET')
+            ->bind('user_add');
+
+        return $controller;
+    }
+
+    /**
+     * Login action
+     *
+     * @param Application $app     Application
+     * @param Request     $request Request
+     * 
+     * @return mixed
+     */
+    public function loginAction(Application $app, Request $request)
+    {
+        $user = ['email' => $app['session']->get('_security.last_username')];
+        $form = $app['form.factory']
+            ->createBuilder(LoginType::class, $user)->getForm();
+        $app['session']->set('userid', $user);
+        return $app['twig']->render(
+            'auth/login.html.twig',
+            [
+                'form' => $form->createView(),
+                'error' => $app['security.last_error']($request),
+            ]
+        );
+    }
+
+
+    /**
+     * Signup Action
+     *
+     * @param Application $app     Application
+     * @param Request     $request Request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function signupAction(Application $app, Request $request)
+    {
+        $user = [];
+
+        $form = $app['form.factory']->createBuilder(
+            SignupType::class,
+            $user
+        )->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository = new UserRepository($app['db']);
+
+            $user = $form->getData();
+            $password = $user['password'];
+            $user['password'] = $app['security.encoder.bcrypt']
+                                ->encodePassword($password, '');
+            $user['role_id'] = 2;
+            $user['photo'] = 'default.jpg';
+            $userRepository->save($user);
+
+            $app['session']->getFlashBag()->add(
+                'messages',
+                [
+                    'type' => 'success',
+                    'message' => 'message.signup_success',
+                ]
+            );
+
+            return $app->redirect(
+                $app['url_generator']
+                ->generate('posts_index_paginated'), 301
+            );
+        }
+
+
+        return $app['twig']->render(
+            'user/add.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
+     * Logout action
+     *
+     * @param Application $app Application
+     *
+     * @return mixed
+     */
+    public function logoutAction(Application $app)
+    {
+        $app['session']->clear();
+
+        return $app['twig']->render('auth/logout.html.twig', []);
+    }
+}

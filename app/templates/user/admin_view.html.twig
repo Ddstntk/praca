@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin
+{% endblock %}
+{#{% block profilepic %}../../files/img/{{ user.idPicture }}.jpg{% endblock %}#}
+{% block body %}
+{% if user is defined and user|length %}
+    <div class="card w-100 text-center" style="width: 18rem;">
+        <img class="w-25 ml-auto mr-auto" src="{{  asset(download_photos_directory ~ '/' ~ user. photo) }}" alt="{{ user.photo }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ user.name }} {{ user.surname }}</h5>
+            <h6 class="card-title">{{ user.birthDate }}</h6>
+            <p class="card-text">{{ user.email }}</p>
+            <p class="card-text">{{ 'user_id.label'|trans }} {{ user.PK_idUsers }}</p>
+            <p class="card-text">{{ 'label.access'|trans }} {{ user.role_id }}</p>
+
+            {% form_theme form with ['bootstrap_4_horizontal_layout.html.twig', 'form/form_errors.html.twig'] %}
+            {{ form_start(form, { method: 'post', action: url('admin_user_edit', {id: user.PK_idUsers} ) }) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-success" />
+            {{ form_end(form) }}
+
+            {#<a class="btn btn-info" href="{{ url('admin_user_edit', {id: user.PK_idUsers }) }}" title="{{ 'admin.edit.label'|trans }}">#}
+                {#{{ 'admin.edit.label'|trans }}#}
+            {#</a>#}
+            <a class="btn btn-danger mt-2" href="{{ url('admin_user_confirm', {id: user.PK_idUsers }) }}" title="{{ 'admin.user.confirm.label'|trans }} "
+               {#onclick="return confirm('{{ 'user.delete.confirm'|trans }} {{ user.name }} {{ user.surname }}?')"#}
+            >
+                {{ 'admin.user.confirm.label'|trans }}
+            </a>
+        </div>
+    </div>
+{% else %}
+    <div>
+        {{ 'no.user.label'|trans }}
+    </div>
+{% endif %}
+{% endblock %}

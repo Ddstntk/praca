@@ -1,0 +1,84 @@
+{#{% extends 'base.html.twig' %}#}
+
+
+{#<div name="chat" class="chat col-3 offset-md-7">#}
+    {#<div >#}
+        {#<div class="card-header bg-danger">#}
+            {#<h3>Messages</h3>#}
+        {#</div>#}
+        {#<div class="card w-100" style="width: 18rem;">#}
+            {#<div class="card-body">#}
+                {#<h5 class="card-title">name</h5>#}
+                {#<h6 class="card-subtitle mb-2 text-muted">time</h6>#}
+                {#<p class="card-text">message</p>#}
+                {#<!-- <p class="card-text">y.content</p> -->#}
+                {#<a href="#" class="card-link">Card link</a>#}
+            {#</div>#}
+            {#<textarea rows="5" style="resize: none; background-color: #ffeded;"></textarea>#}
+        {#</div>#}
+
+    {#</div>#}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+            <!-- Bootstrap -->
+            {#<link#}
+            {#href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
+            <link
+                    href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+            <link
+                    href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
+            <link
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script
+                src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script
+                src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+        <![endif]-->
+
+</head>
+<body bgcolor="white">
+
+
+{% include 'default/_paginator.html.twig' with {
+    paginator: paginator,
+    route_name: 'chat_index_paginated',
+} %}
+<div>
+<div>
+    <div class="card w-100" style="width: 18rem;">
+        {% if paginator.data is defined and paginator.data|length %}
+        {% for row in paginator.data %}
+    <div class="card-body"
+{% if user == row.PK_idUsers %} style="text-align: right" {% endif %}
+    >
+    <b class="card-title">{{ row.name }} {{ row.surname }}</b>
+    <p style="font-size: 0.75em" class="card-subtitle mb-2 text-muted">{{ row.PK_time }}</p>
+    <p class="card-text">{{ row.content }}</p>
+    <!-- <p class="card-text">y.content</p> -->
+    <a href="#" class="card-link">Card link</a>
+</div>
+{% endfor %}
+</div>
+
+</div>
+
+{% else %}
+<div>
+List is empty!
+</div>
+{% endif %}
+</div>
+
+
+</body>
+</html>
