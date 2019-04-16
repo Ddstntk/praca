@@ -10,7 +10,7 @@
         route_name: 'posts_index_paginated',
     } %}
 
-    {% form_theme form with ['bootstrap_4_horizontal_layout.html.twig', 'form/form_errors.html.twig'] %}
+    {% form_theme form with ['bootstrap_3_horizontal_layout.html.twig', 'form/form_errors.html.twig'] %}
     {{ form_start(form, { method: 'post', action: url('posts_add') }) }}
     {{ form_widget(form) }}
     <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-success mb-2" />
