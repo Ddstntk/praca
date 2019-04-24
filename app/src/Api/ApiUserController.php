@@ -13,7 +13,7 @@
  *
  * @link      cis.wzks.uj.edu.pl/~16_szewczuk
  */
-namespace Controller;
+namespace Api;
 
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
@@ -41,7 +41,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @link      cis.wzks.uj.edu.pl/~16_szewczuk
  */
-class UserController implements ControllerProviderInterface
+class ApiUserController implements ControllerProviderInterface
 {
     /**
      * Routing settings
@@ -53,19 +53,13 @@ class UserController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/profile', [$this, 'profileAction'])
-            ->bind('user_profile');
-        $controller->get('/view/{id}', [$this, 'viewAction'])
-            ->bind('user_view');
-        $controller->get('/index', [$this, 'indexAction'])
-            ->bind('users_index_paginated');
-        $controller->match('/edit', [$this, 'editAction'])
-            ->method('GET|POST')
-            ->bind('user_edit');
-        $controller->match('/password', [$this, 'changePassword'])
-            ->method('GET|POST')
-            ->bind('password_change');
-
+        $controller->get('/profile', [$this, 'apiProfileAction']);
+        $controller->get('/view/{id}', [$this, 'apiViewAction']);
+        $controller->get('/index', [$this, 'apiIndexAction']);
+        $controller->match('/edit', [$this, 'apiEditAction'])
+            ->method('GET|POST');
+        $controller->match('/password', [$this, 'apiChangePassword'])
+            ->method('GET|POST');
         return $controller;
     }
 
@@ -234,7 +228,7 @@ class UserController implements ControllerProviderInterface
                 );
             }
 
-//            var_dump($user);
+            var_dump($user);
         }
 
 

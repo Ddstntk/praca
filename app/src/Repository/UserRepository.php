@@ -391,7 +391,7 @@ class UserRepository
 
         $queryBuilder = $this->db->createQueryBuilder();
         $friends = $friendsRepository->getFriendsIds($userId)->execute();
-
+//        var_dump($friends);
         return $queryBuilder->select(
             'k.PK_idUsers',
             'k.name',
@@ -401,7 +401,7 @@ class UserRepository
             'k.birthDate'
         )
             ->from('users', 'k')
-            ->where($queryBuilder -> expr()->notIn('k.PK_idUsers', $friends))
+//            ->where($queryBuilder -> expr()->notIn('k.PK_idUsers', $friends))
             ->andWhere('k.PK_idUsers <> :userId')
             ->setParameters(array(':userId' => $userId, ':friendId' => 1));
     }

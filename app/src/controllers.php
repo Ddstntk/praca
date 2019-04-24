@@ -23,6 +23,16 @@ use Controller\CommentsController;
 use Controller\PhotosController;
 use Controller\AdminController;
 
+//use Api\ApiUserController;
+//use Api\ApiPostsController;
+use Api\ApiAuthController;
+//use Api\ApiChatController;
+use Api\ApiFriendsController;
+//use Api\ApiCommentsController;
+//use Api\ApiPhotosController;
+//use Api\ApiAdminController;
+
+
 $app->get(
     '/',
     function () use ($app) {
@@ -50,3 +60,12 @@ $app->mount('/friend', new FriendsController());
 $app->mount('/comment', new CommentsController());
 $app->mount('/photo', new PhotosController());
 $app->mount('/admin', new AdminController());
+
+//$app->mount('/api/user', new ApiUserController());
+//$app->mount('/api/posts', new ApiPostsController());
+$app->mount('/api/auth', new ApiAuthController());
+//$app->mount('/api/chat', new ApiChatController());
+$app->mount('/api/friend', new ApiFriendsController());
+//$app->mount('/api/comment', new ApiCommentsController());
+//$app->mount('/api/photo', new ApiPhotosController());
+//$app->mount('/api/admin', new ApiAdminController());

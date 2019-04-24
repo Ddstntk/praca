@@ -104,12 +104,23 @@ $app->extend(
 $app->register(
     new DoctrineServiceProvider(),
     [
+//        'db.options' => [
+//            'driver'    => 'pdo_mysql',
+//            'host'      => 'localhost',
+//            'dbname'    => '16_szewczuk',
+//            'user'      => '16_szewczuk',
+//            'password'  => 'dddsiwspkm',
+//            'charset'   => 'utf8',
+//            'driverOptions' => [
+//                1002 => 'SET NAMES utf8',
+//            ],
+//        ],
         'db.options' => [
             'driver'    => 'pdo_mysql',
             'host'      => 'localhost',
-            'dbname'    => '16_szewczuk',
-            'user'      => '16_szewczuk',
-            'password'  => 'dddsiwspkm',
+            'dbname'    => 'projekt',
+            'user'      => 'user',
+            'password'  => 'password',
             'charset'   => 'utf8',
             'driverOptions' => [
                 1002 => 'SET NAMES utf8',
@@ -151,6 +162,7 @@ $app->register(
         ],
         'security.access_rules' => [
             ['^/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+            ['^/api/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
             ['^/admin', 'ROLE_ADMIN'],
             ['^.*$', 'ROLE_USER'],
         ],
