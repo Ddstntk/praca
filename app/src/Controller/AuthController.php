@@ -77,7 +77,7 @@ class AuthController implements ControllerProviderInterface
 
         return $app['twig']->render(
             'auth/login.html.twig',
-            [
+                [
                 'form' => $form->createView(),
                 'error' => $app['security.last_error']($request),
             ]

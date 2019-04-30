@@ -28,6 +28,8 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * Class ChatController.
@@ -145,32 +147,37 @@ class ApiChatController implements ControllerProviderInterface
      *
      * @return mixed
      */
-    public function indexAction(Application $app, SessionInterface $session, $page = 1)
+    public function indexAction(Application $app, Request $request,$page = 1)
     {
+
+
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+//        var_dump($request);
+
+        var_dump($request->request->get('id'));
+
+
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
 
         $chatRepository = new ChatRepository($app['db']);
-        $id = $session->get('chat');
+        $id = 3;
         if (!$id) {
             $idArr = $chatRepository
                 ->findLastChat($userId);
             if (!$idArr) {
-                return $app['twig']->render(
-                    'chat/index.html.twig',
-                    ['paginator' => $chatRepository
-                        ->findAllPaginated(1234, 1234, $page),
-                    'user' => $userId, ]
-                );
+                    $response = new JsonResponse(array('messagesIndexed' => $chatRepository ->findAllPaginated(1234, 1234, $page),'user' => $userId));
+                    $response->headers->set('Content-Type', 'application/json');
+                    return $response;
             }
             $id = $idArr[0]["FK_idConversations"];
         }
 
-        return $app['twig']->render(
-            'chat/index.html.twig',
-            ['paginator' => $chatRepository
-                ->findAllPaginated($userId, $id, $page),
-                'user' => $userId, ]
-        );
+        $response = new JsonResponse(array('messagesIndexed' => $chatRepository -> findAllPaginated($userId, $id, $page),'user' => $userId));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**

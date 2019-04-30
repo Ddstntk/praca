@@ -50,7 +50,7 @@ class ApiAuthController implements ControllerProviderInterface
     {
         $controller = $app['controllers_factory'];
         $controller->get('/login', [$this, 'loginAction']);
-        $controller->post('/login/authenticate', [$this, 'checkCredentials']);
+//        $controller->post('/login/authenticate', [$this, 'checkCredentials']);
         $controller->get('/logout', [$this, 'logoutAction']);
         $controller->get('/signup', [$this, 'signupAction'])
             ->method('POST|GET');
@@ -68,31 +68,22 @@ class ApiAuthController implements ControllerProviderInterface
      */
     public function loginAction(Application $app, Request $request)
     {
-        echo("requestowanie");
-
-        $app->before(function (Request $request) {
-            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-                $data = json_decode($request->getContent(), true);
-                $request->request->replace(is_array($data) ? $data : array());
-            }
-            echo("requestowanie");
-            var_dump($request);
-        });
 //        echo("requestowanie");
-//        var_dump($request);
+//
+//        $app->before(function (Request $request) {
+//            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+//                $data = json_decode($request->getContent(), true);
+//                $request->request->replace(is_array($data) ? $data : array());
+//            }
+//            echo("requestowanie");
+//            var_dump($request);
+//        });
 
         $user = ['email' => $app['session']->get('_security.last_username')];
         $form = $app['form.factory']
             ->createBuilder(LoginType::class, $user)->getForm();
         $app['session']->set('userid', $user);
-
-//        return $app['twig']->render(
-//            'auth/login.html.twig',
-//            [
-//                'form' => $form->createView(),
-//                'error' => $app['security.last_error']($request),
-//            ]
-//        );
+        http_response_code(200);
     }
 
     /**
@@ -106,11 +97,23 @@ class ApiAuthController implements ControllerProviderInterface
     public function checkCredentials(Application $app, Request $request)
     {
 
-                $data = json_decode($request->getContent(), true);
-                $request->request->replace(is_array($data) ? $data : array());
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+//        var_dump($request);
 
-        var_dump($request->request->get('email'));
+        var_dump($request->request->get('pass'));
+//                $data = json_decode($request->getContent(), true);
+//                $request->request->replace(is_array($data) ? $data : array());
 
+//        var_dump($request->getContent());
+//        var_dump($request->request->get('email'));
+
+//        var_dump($request);
+//        $dupa = $request->getContent();
+//        var_dump($dupa);
+//        var_dump($request->request->get('email', 'xd'));
 //        $app->before(function (Request $request) {
 //            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
 //                $data = json_decode($request->getContent(), true);
@@ -125,10 +128,7 @@ class ApiAuthController implements ControllerProviderInterface
 //        });
 
 //
-        return $app->redirect(
-            $app['url_generator']
-                ->generate('posts_index_paginated'),
-            301);
+        return $request->request->get('email');
     }
 
 
@@ -158,7 +158,7 @@ class ApiAuthController implements ControllerProviderInterface
             $user = $form->getData();
             $password = $user['password'];
             $user['password'] = $app['security.encoder.bcrypt']
-                                ->encodePassword($password, '');
+                ->encodePassword($password, '');
             $user['role_id'] = 2;
             $user['photo'] = 'default.jpg';
             $userRepository->save($user);
@@ -170,19 +170,25 @@ class ApiAuthController implements ControllerProviderInterface
                     'message' => 'message.signup_success',
                 ]
             );
+//            $response = new JsonResponse(array('result' => true));
 
-            return $app->redirect(
-                $app['url_generator']
-                ->generate('posts_index_paginated'),
-                301
-            );
+//            return $app->redirect(
+//                $app['url_generator']
+//                ->generate('posts_index_paginated'),
+//                301
+//            );
         }
-
-
-        return $app['twig']->render(
-            'user/add.html.twig',
-            array('form' => $form->createView())
-        );
+//        else{
+//            $response = new JsonResponse(array('result' => false));
+//        }
+//        $response->headers->set('Content-Type', 'application/json');
+//        return $response;
+//
+//        return $app['twig']->render(
+//            'user/add.html.twig',
+//            array('form' => $form->createView())
+//        );
+        http_response_code(200);
     }
 
     /**
@@ -195,7 +201,7 @@ class ApiAuthController implements ControllerProviderInterface
     public function logoutAction(Application $app)
     {
         $app['session']->clear();
-
-        return $app['twig']->render('auth/logout.html.twig', []);
+        http_response_code(200);
+//        return $app['twig']->render('auth/logout.html.twig', []);
     }
 }

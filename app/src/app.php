@@ -111,7 +111,7 @@ $app->register(
 //            'user'      => '16_szewczuk',
 //            'password'  => 'dddsiwspkm',
 //            'charset'   => 'utf8',
-//            'driverOptions' => [
+//	    'driverOptions' => [
 //                1002 => 'SET NAMES utf8',
 //            ],
 //        ],

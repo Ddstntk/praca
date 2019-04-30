@@ -295,7 +295,7 @@ FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
  11 | WARNING | PHP version not specified
 ----------------------------------------------------------------------
 
-
+pyt
 FILE: /home/epi/16_szewczuk/app/src/Form/PostType.php
 ----------------------------------------------------------------------
 FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE
