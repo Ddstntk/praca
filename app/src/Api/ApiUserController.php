@@ -17,6 +17,7 @@ namespace Api;
 
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -53,12 +54,12 @@ class ApiUserController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/profile', [$this, 'apiProfileAction']);
-        $controller->get('/view/{id}', [$this, 'apiViewAction']);
-        $controller->get('/index', [$this, 'apiIndexAction']);
-        $controller->match('/edit', [$this, 'apiEditAction'])
+        $controller->get('/profile', [$this, 'profileAction']);
+        $controller->get('/view/{id}', [$this, 'viewAction']);
+        $controller->get('/index', [$this, 'indexAction']);
+        $controller->match('/edit', [$this, 'editAction'])
             ->method('GET|POST');
-        $controller->match('/password', [$this, 'apiChangePassword'])
+        $controller->match('/password', [$this, 'changePassword'])
             ->method('GET|POST');
         return $controller;
     }
@@ -77,10 +78,14 @@ class ApiUserController implements ControllerProviderInterface
         $friendsRepository = new FriendsRepository($app['db']);
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
 
-        return $app['twig']->render(
-            'user/index.html.twig',
-            ['paginator' => $userRepository->findAllPaginated($friendsRepository, $userId, $page)]
-        );
+        $response = new JsonResponse(array('usersIndexed' => $userRepository->findAllPaginated($friendsRepository, $userId, $page)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+
+//        return $app['twig']->render(
+//            'user/index.html.twig',
+//            ['paginator' => $userRepository->findAllPaginated($friendsRepository, $userId, $page)]
+//        );
     }
 
     /**
@@ -95,10 +100,14 @@ class ApiUserController implements ControllerProviderInterface
     {
         $userRepository = new UserRepository($app['db']);
 
-        return $app['twig']->render(
-            'user/view.html.twig',
-            ['user' => $userRepository->getUserById($id)]
-        );
+        $response = new JsonResponse(array('userView' => $userRepository->getUserById($id)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+
+//        return $app['twig']->render(
+//            'user/view.html.twig',
+//            ['user' => $userRepository->getUserById($id)]
+//        );
     }
 
     /**
@@ -113,76 +122,80 @@ class ApiUserController implements ControllerProviderInterface
         $userRepository = new UserRepository($app['db']);
 
         $id = $app['security.token_storage']->getToken()->getUser()->getID();
-        var_dump($id);
+//        var_dump($id);
 
-        return $app['twig']->render(
-            'user/view.html.twig',
-            ['user' => $userRepository->getUserById($id)]
-        );
+        $response = new JsonResponse(array('userView' => $userRepository->getUserById($id)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+//
+//        return $app['twig']->render(
+//            'user/view.html.twig',
+//            ['user' => $userRepository->getUserById($id)]
+//        );
     }
-
-    /**
-     * Edit action
-     *
-     * @param Application $app     Application
-     * @param Request     $request HttpRequest
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @throws \Doctrine\DBAL\ConnectionException
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    public function editAction(Application $app, Request $request)
-    {
-        $user = [];
-        $userTmp = [];
-        $id = $app['security.token_storage']->getToken()->getUser()->getID();
-        $userRepository = new UserRepository($app['db']);
-        $userTmp = $userRepository->getUserById($id);
-        $form = $app['form.factory']->createBuilder(
-            EditType::class,
-            $user,
-            [   'placeholders' => $userTmp,
-                'user_repository' => new UserRepository($app['db']), ]
-        )->getForm();
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid() && !empty($form)) {
-            $userTmp = $form->getData();
-
-
-            foreach ($userTmp as $key => $value) {
-                if (isset($value)) {
-                    $user[$key] = $value;
-                }
-            }
-
-            if (sizeof($user)) {
-                $user['PK_idUsers'] = $id;
-                $userRepository->save($user);
-
-                $app['session']->getFlashBag()->add(
-                    'messages',
-                    [
-                        'type' => 'success',
-                        'message' => 'message.account_successfully_edited',
-                    ]
-                );
-            }
-
-            return $app->redirect(
-                $app['url_generator']
-                ->generate('user_profile'),
-                301
-            );
-        }
-
-
-        return $app['twig']->render(
-            'user/edit.html.twig',
-            array('form' => $form->createView())
-        );
-    }
+//
+//    /**
+//     * Edit action
+//     *
+//     * @param Application $app     Application
+//     * @param Request     $request HttpRequest
+//     *
+//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     *
+//     * @throws \Doctrine\DBAL\ConnectionException
+//     * @throws \Doctrine\DBAL\DBALException
+//     */
+//    public function editAction(Application $app, Request $request)
+//    {
+//        $user = [];
+//        $userTmp = [];
+//        $id = $app['security.token_storage']->getToken()->getUser()->getID();
+//        $userRepository = new UserRepository($app['db']);
+//        $userTmp = $userRepository->getUserById($id);
+//        $form = $app['form.factory']->createBuilder(
+//            EditType::class,
+//            $user,
+//            [   'placeholders' => $userTmp,
+//                'user_repository' => new UserRepository($app['db']), ]
+//        )->getForm();
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid() && !empty($form)) {
+//            $userTmp = $form->getData();
+//
+//
+//            foreach ($userTmp as $key => $value) {
+//                if (isset($value)) {
+//                    $user[$key] = $value;
+//                }
+//            }
+//
+//            if (sizeof($user)) {
+//                $user['PK_idUsers'] = $id;
+//                $userRepository->save($user);
+//
+//                $app['session']->getFlashBag()->add(
+//                    'messages',
+//                    [
+//                        'type' => 'success',
+//                        'message' => 'message.account_successfully_edited',
+//                    ]
+//                );
+//            }
+//
+//            return $app->redirect(
+//                $app['url_generator']
+//                ->generate('user_profile'),
+//                301
+//            );
+//        }
+//
+//
+//        return $app['twig']->render(
+//            'user/edit.html.twig',
+//            array('form' => $form->createView())
+//        );
+//    }
 
     /**
      * Change password
@@ -197,22 +210,31 @@ class ApiUserController implements ControllerProviderInterface
      */
     public function changePassword(Application $app, Request $request)
     {
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+//        var_dump($request);
+
+        var_dump($request->request->get('password'));
+
+
         $user = [];
         $userTmp = [];
         $id = $app['security.token_storage']->getToken()->getUser()->getID();
         $userRepository = new UserRepository($app['db']);
 
-        $form = $app['form.factory']->createBuilder(
-            PswdType::class,
-            $user,
-            ['user_repository' => new UserRepository($app['db'])]
-        )->getForm();
-        $form->handleRequest($request);
+//        $form = $app['form.factory']->createBuilder(
+//            PswdType::class,
+//            $user,
+//            ['user_repository' => new UserRepository($app['db'])]
+//        )->getForm();
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid() && !empty($form)) {
+//            $user = $form->getData();
 
-        if ($form->isSubmitted() && $form->isValid() && !empty($form)) {
-            $user = $form->getData();
-
-            $password = $user['password'];
+            $password = $request->request->get('password');
             $user['password'] = $app['security.encoder.bcrypt']
                                 ->encodePassword($password, '');
             $user['PK_idUsers'] = $id;
@@ -226,16 +248,18 @@ class ApiUserController implements ControllerProviderInterface
                         'message' => 'message.account_successfully_edited',
                     ]
                 );
-            }
+//            }
 
-            var_dump($user);
+//            var_dump($user);
         }
 
 
 
-        return $app['twig']->render(
-            'user/pswd.html.twig',
-            array('form' => $form->createView())
-        );
+//        return $app['twig']->render(
+//            'user/pswd.html.twig',
+//            array('form' => $form->createView())
+//        );
+
+        return http_response_code(200);
     }
 }

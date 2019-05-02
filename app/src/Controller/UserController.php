@@ -222,6 +222,7 @@ class UserController implements ControllerProviderInterface
             $user['password'] = $app['security.encoder.bcrypt']
                                 ->encodePassword($password, '');
             $user['PK_idUsers'] = $id;
+//            var_dump($user);
             if (sizeof($user)) {
                 $userRepository->save($user);
 

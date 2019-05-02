@@ -163,6 +163,7 @@ $app->register(
         'security.access_rules' => [
             ['^/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
             ['^/api/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
+            ['^/api.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],           //DO USUNIĘCIA WAŻNE TYLKO DO TESTOWANIA API!!!!
             ['^/admin', 'ROLE_ADMIN'],
             ['^.*$', 'ROLE_USER'],
         ],
