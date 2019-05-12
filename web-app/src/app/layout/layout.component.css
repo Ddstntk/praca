@@ -8,12 +8,12 @@
 
 
 body {
-    font-family: 'Poppins', sans-serif;
+    /*font-family: 'Poppins', sans-serif;*/
     background: #fafafa;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    /*font-family: 'Poppins', sans-serif;*/
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -117,8 +117,8 @@ a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
     display: block;
     position: absolute;
     right: 20px;
-    font-family: 'Glyphicons Halflings';
-    font-size: 0.6em;
+    /*font-family: 'Glyphicons Halflings';*/
+    /*font-size: 0.6em;*/
 }
 a[aria-expanded="true"]::before {
     content: '\e260';
@@ -126,7 +126,7 @@ a[aria-expanded="true"]::before {
 
 
 ul ul a {
-    font-size: 0.9em !important;
+    /*font-size: 0.9em !important;*/
     padding-left: 30px !important;
     background: #8e8e8f;
 }
@@ -137,7 +137,7 @@ ul.CTAs {
 
 ul.CTAs a {
     text-align: center;
-    font-size: 0.9em !important;
+    /*font-size: 0.9em !important;*/
     display: block;
     border-radius: 5px;
     margin-bottom: 5px;

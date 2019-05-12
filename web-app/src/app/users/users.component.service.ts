@@ -27,6 +27,10 @@ export class UsersComponentService {
     passwordAction(body): Observable<any> {
         return this.http.post('api/user/password', body);
     }
+
+    idAction(): Observable<any> {
+        return this.http.get('api/user/id');
+    }
 }
 
 // $controller = $app['controllers_factory'];

@@ -1,0 +1,22 @@
+textarea {
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    resize: none; /*remove the resize handle on the bottom right*/
+
+    width: 100%;
+}
+
+button {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.card-body{
+    /*word-wrap: break-word;      !* IE 5.5-7 *!*/
+    /*white-space: -moz-pre-wrap; !* Firefox 1.0-2.0 *!*/
+    /*white-space: pre-wrap;*/
+}

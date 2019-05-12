@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
@@ -10,6 +10,24 @@ import { FriendsComponent } from './friends/friends.component';
 
 import { FriendsComponentService } from "./friends/friends.component.service";
 import {UsersComponent} from "./users/users.component";
+import {ChatComponent} from "./chat/chat.component";
+
+import {LoginComponent} from "./login/login.component";
+import {AuthGuard} from "./_guards/auth.guard";
+import {AuthenticationService} from "./_services/authentication.service";
+import {UserService} from "./_services/user.service";
+import {JwtInterceptor} from "./_helpers/jwt.interceptor";
+import {fakeBackendProvider} from "./_helpers/fake-backend";
+import {routing} from "./app.routing";
+import {HomeComponent} from "./home/home.component";
+
+// import { fakeBackendProvider } from './_helpers/index';
+// import { AuthGuard } from './_guards/index';
+// import { JwtInterceptor } from './_helpers/index';
+// import { AuthenticationService, UserService } from './_services/index';
+// import { LoginComponent } from './login/login.component';
+// import { HomeComponent } from './home/index';
+
 
 @NgModule({
   declarations: [
@@ -17,15 +35,28 @@ import {UsersComponent} from "./users/users.component";
     HeroesComponent,
     LayoutComponent,
     FriendsComponent,
-    UsersComponent
+    UsersComponent,
+      ChatComponent,
+      LoginComponent,
+      HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
       HttpClientModule,
+      routing
   ],
   providers: [
-      FriendsComponentService
+      FriendsComponentService,
+      AuthGuard,
+      AuthenticationService,
+      UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+      fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })

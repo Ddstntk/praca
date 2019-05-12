@@ -29,3 +29,8 @@ body, input[type="text"], button {
     padding: 8px;
     display: inline-block;
 }
+
+.component-inner-container {
+    height: 100%;
+    width: 100%;
+}
