@@ -216,7 +216,7 @@ class ApiUserController implements ControllerProviderInterface
         }
 //        var_dump($request);
 
-        var_dump($request->request->get('password'));
+//        var_dump($request->request->get('password'));
 
 
         $user = [];
@@ -238,6 +238,8 @@ class ApiUserController implements ControllerProviderInterface
             $user['password'] = $app['security.encoder.bcrypt']
                                 ->encodePassword($password, '');
             $user['PK_idUsers'] = $id;
+//            var_dump($app['security.encoder.bcrypt']
+//                ->encodePassword($password, ''));
             if (sizeof($user)) {
                 $userRepository->save($user);
 
