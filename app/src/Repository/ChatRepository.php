@@ -224,7 +224,7 @@ class ChatRepository
      *
      * @return nothing
      */
-    public function save($message, $userId, $id)
+    public function save($body, $userId, $id)
     {
         $this->db->beginTransaction();
         $queryBuilder = $this->db->createQueryBuilder();
@@ -246,8 +246,9 @@ class ChatRepository
         try {
             if ($this->findForExistence($id)) {
                 $currentDateTime = new \DateTime();
+                $message = [];
                 unset($message['messages']);
-
+                $message['content'] = $body;
                 // add new record
                 $message['PK_time'] = $currentDateTime->format('Y-m-d H:i:s');
                 $message['FK_idUsers'] = $userId;
