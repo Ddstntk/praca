@@ -23,6 +23,10 @@ use Repository\UserRepository;
 use Form\SignupType;
 use Service\userTokenService;
 use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\User;
+
 
 /**
  * Class AuthController.
@@ -49,7 +53,9 @@ class ApiAuthController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/login', [$this, 'loginAction']);
+//        $controller->get('/login', [$this, 'loginAction']);
+        $controller->post('/login', [$this, 'loginAction']);
+
 //        $controller->post('/login/authenticate', [$this, 'checkCredentials']);
         $controller->get('/logout', [$this, 'logoutAction']);
         $controller->get('/signup', [$this, 'signupAction'])
@@ -66,26 +72,62 @@ class ApiAuthController implements ControllerProviderInterface
      *
      * @return mixed
      */
+//    public function loginAction(Application $app, Request $request)
+//    {
+////        echo("requestowanie");
+////
+////        $app->before(function (Request $request) {
+////            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+////                $data = json_decode($request->getContent(), true);
+////                $request->request->replace(is_array($data) ? $data : array());
+////            }
+////            echo("requestowanie");
+////            var_dump($request);
+////        });
+//
+//        $user = ['email' => $app['session']->get('_security.last_username')];
+//        $form = $app['form.factory']
+//            ->createBuilder(LoginType::class, $user)->getForm();
+//        $app['session']->set('userid', $user);
+//        http_response_code(200);
+//    }
+
     public function loginAction(Application $app, Request $request)
     {
-//        echo("requestowanie");
-//
-//        $app->before(function (Request $request) {
-//            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-//                $data = json_decode($request->getContent(), true);
-//                $request->request->replace(is_array($data) ? $data : array());
-//            }
-//            echo("requestowanie");
-//            var_dump($request);
-//        });
+        $vars = json_decode($request->getContent(), true);
 
-        $user = ['email' => $app['session']->get('_security.last_username')];
-        $form = $app['form.factory']
-            ->createBuilder(LoginType::class, $user)->getForm();
-        $app['session']->set('userid', $user);
-        http_response_code(200);
+        try {
+            if (empty($vars['_username']) || empty($vars['_password'])) {
+                throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $vars['_username']));
+            }
+
+            /**
+             * @var $user User
+             */
+//            $user = $app['users']->loadUserByUsername($vars['_username']);
+            $userRepository = new UserRepository($app['db']);
+            $user = $userRepository->loadUserByEmail($vars['_username']);
+
+//            var_dump($user);
+//            var_dump($vars["_password"]);
+//            var_dump($app['security.encoder.digest']->isPasswordValid($user["password"], $vars['_password'], ''));
+            if (! $app['security.encoder.bcrypt']->isPasswordValid($user["password"], $vars['_password'], '')) {
+                throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $vars['_username']));
+            } else {
+                $response = [
+//                    'token' => $app['security.jwt.encoder']->encode(['name' => $user['email']]),
+                    'token' => $app['jwt_auth']->generateToken($user['id'])
+                ];
+            }
+        } catch (UsernameNotFoundException $e) {
+            $response = [
+                'success' => false,
+                'error' => 'Invalid credentials',
+            ];
+        }
+
+        return $app->json($response, Response::HTTP_OK);
     }
-
     /**
      * Login action
      *
@@ -96,39 +138,39 @@ class ApiAuthController implements ControllerProviderInterface
      */
     public function checkCredentials(Application $app, Request $request)
     {
+        $vars = json_decode($request->getContent(), true);
 
-        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-            $data = json_decode($request->getContent(), true);
-            $request->request->replace(is_array($data) ? $data : array());
+        try {
+            if (empty($vars['_username']) || empty($vars['_password'])) {
+                throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $vars['_username']));
+            }
+
+            /**
+             * @var $user User
+             */
+//            $user = $app['users']->loadUserByUsername($vars['_username']);
+            $userRepository = new UserRepository($app['db']);
+            $user = $userRepository->loadUserByEmail($vars['_username']);
+
+//            var_dump($user);
+//            var_dump($vars["_password"]);
+//            var_dump($app['security.encoder.digest']->isPasswordValid($user["password"], $vars['_password'], ''));
+            if (! $app['security.encoder.bcrypt']->isPasswordValid($user["password"], $vars['_password'], '')) {
+                throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $vars['_username']));
+            } else {
+                $response = [
+//                    'token' => $app['security.jwt.encoder']->encode(['name' => $user['email']]),
+                    'token' => $app['jwt_auth']->generateToken($user['id'])
+                ];
+            }
+        } catch (UsernameNotFoundException $e) {
+            $response = [
+                'success' => false,
+                'error' => 'Invalid credentials',
+            ];
         }
-//        var_dump($request);
 
-        var_dump($request->request->get('pass'));
-//                $data = json_decode($request->getContent(), true);
-//                $request->request->replace(is_array($data) ? $data : array());
-
-//        var_dump($request->getContent());
-//        var_dump($request->request->get('email'));
-
-//        var_dump($request);
-//        $dupa = $request->getContent();
-//        var_dump($dupa);
-//        var_dump($request->request->get('email', 'xd'));
-//        $app->before(function (Request $request) {
-//            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
-//                $data = json_decode($request->getContent(), true);
-//                $request->request->replace(is_array($data) ? $data : array());
-////            }
-//            echo("requestowanie");
-////        var_dump($request);
-//            echo "początek";
-//        var_dump($data);
-//        echo "koniec";
-//            return $data;
-//        });
-
-//
-        return $request->request->get('email');
+        return $app->json($response, Response::HTTP_OK);
     }
 
 

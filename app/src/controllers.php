@@ -32,25 +32,25 @@ use Api\ApiFriendsController;
 //use Api\ApiPhotosController;
 //use Api\ApiAdminController;
 
-
-$app->get(
-    '/',
-    function () use ($app) {
-        $userRepository = new \Repository\UserRepository($app['db']);
-
-        return $app['twig']->render(
-            'user/view.html.twig',
-            ['user' => $userRepository
-                ->getUserById(
-                    $app['security.token_storage']
-                    ->getToken()
-                    ->getUser()
-                    ->getID()
-                ), ]
-        );
-    }
-)
-    ->bind('homepage');
+//
+//$app->get(
+//    '/',
+//    function () use ($app) {
+//        $userRepository = new \Repository\UserRepository($app['db']);
+//
+//        return $app['twig']->render(
+//            'user/view.html.twig',
+//            ['user' => $userRepository
+//                ->getUserById(
+//                    $app['security.token_storage']
+//                    ->getToken()
+//                    ->getUser()
+//                    ->getID()
+//                ), ]
+//        );
+//    }
+//)
+//    ->bind('homepage');
 
 $app->mount('/user', new UserController());
 $app->mount('/posts', new PostsController());
@@ -66,6 +66,15 @@ $app->mount('/api/user', new ApiUserController());
 $app->mount('/api/auth', new ApiAuthController());
 $app->mount('/api/chat', new ApiChatController());
 $app->mount('/api/friend', new ApiFriendsController());
+
+
+$app->get('/api/protected_resource', function() use ($app){
+    return $app->json(['hello' => 'world']);
+});
+//$token = $app['security.token_storage']->getToken();
+//var_dump($token);
+//$userId = $app['security.token_storage']->getToken()->getUser()->getID();
+//var_dump($userId);
 //$app->mount('/api/comment', new ApiCommentsController());
 //$app->mount('/api/photo', new ApiPhotosController());
 //$app->mount('/api/admin', new ApiAdminController());

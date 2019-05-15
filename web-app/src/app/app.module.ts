@@ -3,15 +3,18 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 
+//LAYOUT
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { LayoutComponent } from './layout/layout.component';
 import { FriendsComponent } from './friends/friends.component';
 
+//APP LOGIC
 import { FriendsComponentService } from "./friends/friends.component.service";
 import {UsersComponent} from "./users/users.component";
 import {ChatComponent} from "./chat/chat.component";
 
+//LOGIN
 import {LoginComponent} from "./login/login.component";
 import {AuthGuard} from "./_guards/auth.guard";
 import {AuthenticationService} from "./_services/authentication.service";
@@ -20,6 +23,12 @@ import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {fakeBackendProvider} from "./_helpers/fake-backend";
 import {routing} from "./app.routing";
 import {HomeComponent} from "./home/home.component";
+// import {DashboardComponent} from "./dashboard/dashboard/dashboard.component";
+//WINDOWS
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatToolbarModule} from '@angular/material';
+// import {DashboardComponent} from "./dashboard/dashboard/dashboard.component";
+import {RoutingModule} from "./routing/routing.module";
 
 // import { fakeBackendProvider } from './_helpers/index';
 // import { AuthGuard } from './_guards/index';
@@ -32,19 +41,26 @@ import {HomeComponent} from "./home/home.component";
 @NgModule({
   declarations: [
     AppComponent,
+      HomeComponent,
     HeroesComponent,
     LayoutComponent,
     FriendsComponent,
     UsersComponent,
+      // DashboardComponent,
       ChatComponent,
       LoginComponent,
-      HomeComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    RoutingModule,
     FormsModule,
       HttpClientModule,
-      routing
+    MatToolbarModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+      // routing
   ],
   providers: [
       FriendsComponentService,
@@ -60,4 +76,5 @@ import {HomeComponent} from "./home/home.component";
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

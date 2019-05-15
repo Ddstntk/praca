@@ -16,6 +16,7 @@
 
 namespace Api;
 
+use Ofat\SilexJWT\Middleware\JWTTokenCheck;
 use Repository\UserRepository;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
@@ -29,7 +30,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Ofat\SilexJWT\JWTAuth;
 
 /**
  * Class ChatController.
@@ -66,6 +67,7 @@ class ApiChatController implements ControllerProviderInterface
         $controller->match('/send', [$this, 'sendAction'])
             ->method('POST|GET')
             ->bind('messages_send');
+//            ->before(new JWTTokenCheck());
         $controller->match('/new', [$this, 'newChat'])
             ->method('POST|GET')
             ->bind('conversation_new');
@@ -239,7 +241,10 @@ class ApiChatController implements ControllerProviderInterface
     public function sendAction(Application $app, Request $request)
     {
         $post = [];
+        $token = $app['security.token_storage']->getToken();
+//        var_dump($token);
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
+//        var_dump($userId);
 
         $chatRepository = new ChatRepository($app['db']);
 //        $id = $session->get('chat');

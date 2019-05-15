@@ -1,18 +1,25 @@
-<div class="component-container">
+<div class="component-container" style="height: 100%">
   <div class="component-inner-container">
 <!--      <button class="btn btn-default" (click)="indexAction();">INDEX ACTION TEST</button>-->
 <!--      <button class="btn btn-default" (click)="allAction();">ALL TEST</button>-->
 
-      <div style="overflow: scroll; max-height: 50%; width: 100%;">
-        <div *ngFor="let message of messages"  class="card" >
-          <div class="card-body" [ngStyle]="">
-            <b class="card-title">{{message.name}} {{message.surname}}</b>
-            <p style="font-size: 0.75em" class="card-subtitle mb-2 text-muted">{{message.PK_time}}</p>
-            <p style="word-wrap: break-word;" class="card-body">{{message.content}}</p>
-          </div>
-        </div>
+<!--      <div style="overflow: scroll; max-height: 50%; width: 100%;">-->
+<!--        <div *ngFor="let message of messages"  class="card" >-->
+<!--          <div class="card-body" [ngStyle]="">-->
+<!--            <b class="card-title">{{message.name}} {{message.surname}}</b>-->
+<!--            <p style="font-size: 0.75em" class="card-subtitle mb-2 text-muted">{{message.PK_time}}</p>-->
+<!--            <p style="word-wrap: break-word;" class="card-body">{{message.content}}</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      -->
+    <div class="chat-container">
+      <div *ngFor="let message of messages" class="container">
+          <img src="" alt="Avatar">
+          <p>{{message.content}}</p>
+          <span class="time-right">{{message.PK_time}}</span>
       </div>
-
+    </div>
 <!--      <button (click)="editAction();">EDIT USER TEST</button>-->
       <textarea [(ngModel)]="messageBody"></textarea>
       <button class="btn btn-default" (click)="Action(12);">NEW TEST</button>

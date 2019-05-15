@@ -33,6 +33,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Service\userTokenService;
 use Repository\UserRepository;
 
+use Ofat\SilexJWT\JWTAuth;
+
+
 $app = new Application();
 $app->register(new ServiceControllerServiceProvider());
 $app->register(new AssetServiceProvider());
@@ -133,6 +136,11 @@ $app->register(new FormServiceProvider());
 $app->register(new ValidatorServiceProvider());
 
 $app->register(new SessionServiceProvider());
+
+//$app->register(new JWTAuth(),[
+//    'jwt.secret' => 'test'
+//]);
+
 $app->register(
     new SecurityServiceProvider(),
     [
@@ -163,7 +171,7 @@ $app->register(
         'security.access_rules' => [
             ['^/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
             ['^/api/auth.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],
-            ['^/api.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],           //DO USUNIĘCIA WAŻNE TYLKO DO TESTOWANIA API!!!!
+//            ['^/api.+$', 'IS_AUTHENTICATED_ANONYMOUSLY'],           //DO USUNIĘCIA WAŻNE TYLKO DO TESTOWANIA API!!!!
             ['^/admin', 'ROLE_ADMIN'],
             ['^.*$', 'ROLE_USER'],
         ],
@@ -172,5 +180,4 @@ $app->register(
         ],
     ]
 );
-
 return $app;

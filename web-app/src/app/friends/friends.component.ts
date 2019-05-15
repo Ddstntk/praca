@@ -4,7 +4,7 @@ import { FriendsComponentService } from "./friends.component.service";
 @Component({
   selector: 'app-friends',
   templateUrl: './friends.component.html',
-  styleUrls: ['./friends.component.css'],
+  styleUrls: ['./friends.component.scss'],
   providers: [FriendsComponentService]
 })
 export class FriendsComponent implements OnInit {
@@ -43,6 +43,12 @@ export class FriendsComponent implements OnInit {
 
   deleteFriendAction() {
     this.friendsService.deleteAction(1234).subscribe(data => {
+
+    });
+  }
+
+  login() {
+    this.friendsService.loginAction({_username: "admin@admin.com", _password: "admin123"}).subscribe(data => {
 
     });
   }

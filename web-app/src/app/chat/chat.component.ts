@@ -5,7 +5,7 @@ import { UsersComponentService } from "../users/users.component.service";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css'],
+  styleUrls: ['./chat.component.scss'],
   providers: [ChatComponentService,
   UsersComponentService],
 

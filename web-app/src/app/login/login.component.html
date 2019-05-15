@@ -4,15 +4,15 @@
         Password: test
     </div>
     <h2>Login</h2>
-    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" action="/auth_login_check" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+            <input id="login_type_email" name="login_type[email]" type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
             <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+            <input id="login_type_password" name="login_type[password]"  type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
         </div>
         <div class="form-group">
@@ -22,3 +22,18 @@
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     </form>
 </div>
+
+
+<!--<div class="container" style="margin-top: 300px">-->
+<!--    <h1>HEHE</h1>-->
+<!--    <form name="login_type" method="post" action="http://localhost:8888/auth_login_check" class="form-horizontal">-->
+<!--        <div id="login_type">-->
+<!--            <div class="form-group"><label class="col-sm-2 control-label required" for="login_type_email">Email</label><div class="col-sm-10"><input type="email" id="login_type_email" name="login_type[email]" required="required" max_length="32" class="form-control">    </div>-->
+<!--            </div><div class="form-group"><label class="col-sm-2 control-label required" for="login_type_password">Hasło</label><div class="col-sm-10"><input type="password" id="login_type_password" name="login_type[password]" required="required" max_length="32" class="form-control">    </div>-->
+<!--        </div></div>-->
+<!--        <input type="submit" value="Zaloguj" class="btn btn-success">-->
+<!--    </form>-->
+<!--    <a class="btn btn-default" href="http://localhost:8888/auth/signup" title="Zarejestruj się!">-->
+<!--        Zarejestruj się!-->
+<!--    </a>-->
+<!--</div>-->

@@ -27,6 +27,10 @@ export class FriendsComponentService {
     deleteAction(friendId): Observable<any> {
         return this.http.get('api/friend/'+ friendId +'/delete');
     }
+
+    loginAction(friendId): Observable<any> {
+        return this.http.post('auth/login', friendId);
+    }
 }
 
 // $controller->get('/invite/{friendId}', [$this, 'apiInviteAction']);
