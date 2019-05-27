@@ -1,6 +1,8 @@
 import {Component, ComponentFactoryResolver, Injector, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {DashboardCard} from '../dashboard-card';
 
+import {UsersComponentService} from "../dashboard-users/dashboard-users.component.service";
+
 @Component({
   selector: 'app-dashboard-cards-spawner',
   templateUrl: './dashboard-cards-spawner.component.html',
@@ -9,7 +11,7 @@ import {DashboardCard} from '../dashboard-card';
 export class DashboardCardsSpawnerComponent implements OnInit {
   @ViewChild('spawn', {read: ViewContainerRef}) container;
 
-  constructor(private resolver: ComponentFactoryResolver) {
+  constructor(private resolver: ComponentFactoryResolver, private userService: UsersComponentService) {
   }
 
   @Input() set card(data: DashboardCard) {
@@ -26,6 +28,9 @@ export class DashboardCardsSpawnerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getIdAction().subscribe(data => {
+      localStorage.setItem("userId", data.userId)
+    })
   }
 
 }

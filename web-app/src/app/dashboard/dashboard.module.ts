@@ -4,6 +4,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {DashboardRoutingModule} from './routing/dashboard-routing.module';
 import {DashboardCardsService} from './services/dashboard-cards/dashboard-cards.service';
 import {DashboardChatComponent} from './cards/dashboard-chat/dashboard-chat.component';
+import {DashboardPostsComponent} from "./cards/dashboard-posts/dashboard-posts.component";
 import {DashboardCardsSpawnerComponent} from './cards/dashboard-cards-spawner/dashboard-cards-spawner.component';
 import {
   MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatListModule, MatSidenavModule,
@@ -13,7 +14,13 @@ import {
 import { FormsModule } from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ChatComponentService} from "../chat/chat.component.service";
-import {UsersComponentService} from "../users/users.component.service";
+
+import {UsersComponentService} from "./cards/dashboard-users/dashboard-users.component.service";
+import {PostsComponentService} from "./cards/dashboard-posts/dashboard-posts.component.service";
+import {DashboardFriendsComponent} from "./cards/dashboard-friends/dashboard-friends.component";
+import {FriendsComponentService} from "./cards/dashboard-friends/dashboard-friends.component.service";
+import {DashboardUsersComponent} from "./cards/dashboard-users/dashboard-users.component";
+import {UsersFilterPipe} from "../_pipes/users.pipe";
 
 @NgModule({
   imports: [
@@ -29,8 +36,23 @@ import {UsersComponentService} from "../users/users.component.service";
     DashboardRoutingModule,
       FormsModule
   ],
-  declarations: [DashboardComponent, DashboardChatComponent, DashboardCardsSpawnerComponent],
-  providers: [DashboardCardsService, ChatComponentService, UsersComponentService]
+  declarations: [
+      DashboardComponent,
+    DashboardChatComponent,
+    DashboardPostsComponent,
+    DashboardCardsSpawnerComponent,
+    DashboardFriendsComponent,
+      DashboardUsersComponent,
+      UsersFilterPipe
+  ],
+  providers: [
+      DashboardCardsService,
+    ChatComponentService,
+    // UsersComponentService,
+    PostsComponentService,
+    FriendsComponentService,
+    UsersComponentService
+  ]
 })
 export class DashboardModule {
 }

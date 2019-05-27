@@ -1,0 +1,37 @@
+<mat-card style="margin: 15px;" class="mat-elevation-z15" fxFlex fxLayoutAlign="space-between" fxLayout="column">
+  <mat-card-header>
+      <div style="padding: 20px">
+          <input placeholder="Filtruj" style="color: black" (change)="getFiltered()" [(ngModel)]="filter">
+          <button class="btn btn-warning" (click)="getFiltered()">Filtruj</button>
+          {{pagesNumber}}
+<!--          <textarea [(ngModel)]="postBody"></textarea>-->
+          <!--            <select (change)="selectChat($event.target.value)">-->
+          <!--                <option *ngFor="let chat of chats" [value]="chat.FK_idConversations" >{{chat.name}} {{chat.surname}}</option>-->
+          <!--            </select>-->
+<!--          <button class="btn btn-primary" (click)="addAction(postBody);">SEND TEST</button>-->
+
+          <!--            <button class="btn btn-default" (click)="Action(12);">NEW TEST</button>-->
+
+      </div>
+  </mat-card-header>
+  <mat-card-content fxLayout="column" fxLayoutAlign="space-between" fxFlex>
+      <div class="component-container" style="height: 100%; overflow-x: scroll; background-color: lightgray" fxFlex>
+
+<!--          <div *ngFor="let user of users| usersfilter: filter" class="container user-tile" style="height: 140px;width: 100px;float: left">-->
+          <div *ngFor="let user of users" class="container user-tile" style="height: 140px;width: 100px;float: left">
+
+          <p style="color: black"><b>{{user.name}} {{user.surname}}</b><b class="time-left">{{user.modified_at}}</b></p>
+              <img src="../../../../assets/images/0.jpg" alt="Avatar">
+<!--              <img src="../../../../../../app/files/img/logo.png" alt="Avatar">-->
+
+              <!--              <p style="color: #0e0e0e">{{post.content}}</p>-->
+                    <button *ngIf="!user.isFriend" class="btn btn-warning" (click)="inviteAction(user.PK_idUsers)">Zaproś</button>
+                    <button class="btn btn-default"><a [routerLink]="['/view/', user.PK_idUsers]">profile</a></button>
+          </div>
+
+      </div>
+<!--      <button class="btn btn-primary" (click)="pageAction(-1)"></button>-->
+<!--      <button class="btn btn-default" (click)="pageAction(+1)"></button>-->
+  </mat-card-content>
+
+</mat-card>

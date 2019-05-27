@@ -1,0 +1,34 @@
+<mat-card style="margin: 15px;" class="mat-elevation-z15" fxFlex fxLayoutAlign="space-between" fxLayout="column">
+  <mat-card-header>
+      <div style="padding: 20px">
+          <input placeholder="Filtruj" style="color: black" [(ngModel)]="filter">
+          <button class="btn btn-warning" (click)="invitesAction()">Zaproszenia</button>
+          <button class="btn btn-default" (click)="indexAction()">Znajomi</button>
+
+          <!--          <textarea [(ngModel)]="postBody"></textarea>-->
+          <!--            <select (change)="selectChat($event.target.value)">-->
+          <!--                <option *ngFor="let chat of chats" [value]="chat.FK_idConversations" >{{chat.name}} {{chat.surname}}</option>-->
+          <!--            </select>-->
+<!--          <button class="btn btn-primary" (click)="addAction(postBody);">SEND TEST</button>-->
+
+          <!--            <button class="btn btn-default" (click)="Action(12);">NEW TEST</button>-->
+      </div>
+  </mat-card-header>
+  <mat-card-content fxLayout="column" fxLayoutAlign="space-between" fxFlex>
+      <div class="component-container" style="height: 100%; overflow-x: scroll; background-color: lightgray" fxFlex>
+
+          <div *ngFor="let friend of friends | usersfilter: filter" class="container user-tile" style="height: 140px;width: 100px;float: left">
+              <p style="color: black"><b>{{friend.name}} {{friend.surname}} {{friend.PK_idUsers}}</b><b class="time-left">{{friend.modified_at}}</b></p>
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAflBMVEX///8AAACgoKCYmJj39/fY2NjOzs78/Pzl5eXt7e34+Pi1tbWkpKS5ubmnp6fZ2dk+Pj7Hx8fS0tJgYGDf399DQ0Pu7u6RkZFVVVU0NDRkZGR2dnZqamoNDQ1SUlIZGRlycnKCgoIfHx8sLCyJiYlJSUkbGxsmJiavr68SEhJPw9DsAAAEsklEQVR4nO2dh3YiMQxFYxjKQOg9tCGBDfn/H1xYwoEsU1wUScN59wt8Y8aybMl5eQEAAAAAAAAAAAAAAAAAAABPR6MV1TpnalGrIT0Ycqa1atI3N/pJtTaVHhQd0+N8ax7Zzo+R9NBIGK5S7K4kNenhBTPo5/idOdSlhxhEb17gd2Y0lh6mN42lhd+ZnfRIPRlY+p1YD6UH68POXvBEVXq4zkQjJ8HTqio9YkemfxwFjVm0pAftQuzsd+KjRJuc+N3H0ExKs8WJPrwET9FfeuS2TDwFjXmTHrodtnE+jVIEjU6AoDEl2IlH6yDDhfT4i8nLlWyYSQsUUQ8UNKYprVDAIthwJK2QT9gyc0H3YlOU0dugehIdUsIcNOf8bySGe2mNbKYkgmYt7ZHNK42h0Xv8RrHOnFF7MhURCRojbZIFRTC8oHU13ZMZdqRVMjiQGSr9EBu+hxePbKRd0mmSCWrNEmt0hludB4tDOkOlSSJdsDCmJy2TCk1icUFnjhh+gHFD520b5XcIQxl6hIY6VxrCiK80WkR+d2ppfCq9LaVKgI2ZSKtkEHqgfyORVsmgS2Z4lFbJgC5c6FxKT5AZSotkQvUhLqVFMqHKLgbSIpk0aAQVn3kHFSncUHxvQXSQofW09B82FbNF6C6qociC1QbDC5snn0KKFCqWVigi9PKiIi1QSODZvta86Z6wxUZ1pLgyCxDsSg/eDv+KDL1b7v/wvUjUHihuRH7VbfMSdSV6VXpvSiToNYtz6TE70nLtmSnNInPDLWiUJEz8pGf/MU50nuIX0rCdxlfpkfoztomMb+qziVyGRVn/qhQ70VzGu+w7qY9ZuefvStRJPlP0Fst6qWJ8Pq3mcXfX8LXezNrxE+ndaNZPDEv9y4yOoaG7PdDcZzlcfoVWTu6N+VwNlP6A29+33Af/SWh9x5btTt8mp1G5WyV9747uj3i0xcn2z5i39JnGaPczmuwUlWD2Hjp/t+6V2u2vh4ipJeGIUu/U+m5tIbXUHayOnKP++Le/sLFfEgeZ1x0KjsCrWWM7sZjZzEHczSs1WkmXRxWdjR66+Wti1Ck67liIboHitB31A8v0PWgjbs+sjgEE40bTvlavv9pXOoPauHlm2K7ul3P7tnaxmuix+xMtnghdC8dZiyg9a5GoEfEJGvMuYej/gokPApc2O1ZBgdBP2SBjB3PMoGuItabPa5jwG/JmGoSNeA5wnm2EVz75wNg7S9nD5QLfHpyu7cANtneyvF7Uo2DLlSvmJb2/C1cBOFtK8cCKR5CyR80VHsOjoCHPz9S1joQSntfcrM5mfgmW8tNp2LOBYWw5DGX2pFc4jjMoHxZwh6PJW9aQYzHlz+7v4Xh9SDIc8hSI0XX7+sCRXsAQhvoNqR5HhCEMYQhDGMIQhjCE4W9SKR4GDGEIQxjCEIYwhCEMYQhDGMJQsCIKhjCEIQxhCEM9hrIRn6M56Pkrhij/FYk7HHVtAi1PN9YsfTM0/2zUj4RDULTAlKlFT67QO+ERlKuDfmd7fkjod7pmbCMVaV77Yu2TnfJ/iwn3C1l13i7LkcTLEXH9WOGhPVT0oBIAAAAAAAAAAAAAAAAAAAAAz8tferRZACQxxvwAAAAASUVORK5CYII=" alt="Avatar">
+<!--              <p style="color: #0e0e0e">{{post.content}}</p>-->
+                    <button class="btn btn-primary" (click)="messageAction(friend.PK_idUsers)">message</button>
+                    <button class="btn btn-default" [routerLink]="['/view/', friend.PK_idUsers]">profile</button>4
+                    <button *ngIf="view=='invites'" class="btn btn-warning" (click)="addFriendAction(friend.PK_idUsers)">akceptuj</button>
+          </div>
+
+      </div>
+<!--      <button class="btn btn-primary" (click)="pageAction(-1)"></button>-->
+<!--      <button class="btn btn-default" (click)="pageAction(+1)"></button>-->
+  </mat-card-content>
+
+</mat-card>
