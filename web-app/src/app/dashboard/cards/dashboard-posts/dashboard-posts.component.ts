@@ -1,19 +1,19 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {DashboardCard} from '../dashboard-card';
 import {AbstractDashboardCard} from '../abstract-dashboard-card';
-import {ChatComponentService} from "../../../chat/chat.component.service";
-import {UsersComponentService} from "../../../users/users.component.service";
-
+// import {ChatComponentService} from "../../../chat/chat.component.service";
+// import {UsersComponentService} from "../../../users/users.component.service";
+import {PostsComponentService} from "./dashboard-posts.component.service";
 
 
 @Component({
-  selector: 'app-dashboard-chat',
-  templateUrl: './dashboard-chat.component.html',
-  styleUrls: ['./dashboard-chat.component.scss']
+  selector: 'app-dashboard-posts',
+  templateUrl: './dashboard-posts.component.html',
+  styleUrls: ['./dashboard-posts.component.scss']
 })
-export class DashboardChatComponent extends AbstractDashboardCard implements OnInit {
+export class DashboardPostsComponent extends AbstractDashboardCard implements OnInit {
 
-  constructor(private injector: Injector, private chatService: ChatComponentService, private userService: UsersComponentService) {
+  constructor(private injector: Injector, private postsService: PostsComponentService) {
     super(injector.get(DashboardCard.metadata.NAME),
       injector.get(DashboardCard.metadata.ROUTERLINK),
       injector.get(DashboardCard.metadata.ICONCLASS),
@@ -24,51 +24,52 @@ export class DashboardChatComponent extends AbstractDashboardCard implements OnI
   friends: any;
   chats = [];
   chatSelected: number;
-  messages: any;
+  posts: any;
+  page: number;
 
   ngOnInit() {
+    this.page = 1;
     // this.friends = this.friendsService.indexAction();
     // alert(JSON.stringify(this.friends));
-    this.chatSelected=81;
-    this.chatService.allAction().subscribe(data => {
-      this.chats = data.chatsIndexed[0];
-      this.indexAction(this.chatSelected);
-    });
+    // this.chatSelected=81;
+    // this.chatService.allAction().subscribe(data => {
+    //   this.chats = data.chatsIndexed[0];
+    //   this.indexAction(this.chatSelected);
+    // });
+    this.indexAction()
   }
 
-  indexAction(chat) {
-    this.chatService.indexAction(chat).subscribe(data => {
-      this.messages=data.messagesIndexed.data;
-      // alert(JSON.stringify(this.messages))
+  indexAction() {
+    this.postsService.indexAction(this.page).subscribe(data => {
+      this.posts=data.postsIndexed.data;
     });
   }
 
   allAction() {
-    this.chatService.allAction().subscribe(data => {
-
-    });
+    // this.chatService.allAction().subscribe(data => {
+    //
+    // });
   }
 
-  newAction(id) {
-    this.chatService.newAction(id).subscribe(data => {
-      this.idAction();
-    });
+  pageAction(value) {
+    this.page += value;
+    this.indexAction()
   }
 
-  sendAction(messageBody) {
-    this.chatService.sendAction({body:messageBody, id:this.chatSelected}).subscribe(data => {
-      this.indexAction(this.chatSelected);
+  addAction(postBody) {
+    this.postsService.addAction({body:postBody, visibility:0}).subscribe(data => {
+      this.indexAction()
     });
   }
 
   selectChat(value) {
-    this.chatSelected = value;
+    // this.chatSelected = value;
   }
 
   idAction() {
-    this.userService.idAction().subscribe(data => {
-      alert(data.id)
-      return data
-    })
+    // this.userService.idAction().subscribe(data => {
+    //   alert(data.id)
+    //   return data
+    // })
   }
 }
