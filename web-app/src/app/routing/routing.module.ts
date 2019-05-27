@@ -1,25 +1,42 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from '../home/home.component';
+import {UsersComponent} from "../users/users.component";
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home'
+    redirectTo: 'dashboard'
   },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
+  // {
+  //   path: 'home',
+  //   component: HomeComponent
+  // },
   {
     path: 'dashboard',
     loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
   },
   {
-    path: '**',
-    redirectTo: 'home'
-  }
+    path: 'profile',
+    redirectTo: 'profile'
+  },
+  {
+    path: 'profile',
+    component: UsersComponent
+  },
+  // {
+  //   path: 'user',
+  //   redirectTo: 'user'
+  // },
+  {
+    path: 'view/:id',
+    component: UsersComponent
+  },
+  // {
+  //   path: '**',
+  //   redirectTo: 'home'
+  // }
 ];
 
 @NgModule({

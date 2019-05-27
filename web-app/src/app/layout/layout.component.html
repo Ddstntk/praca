@@ -19,34 +19,37 @@
 <!--</nav>-->
 
 <div class="wrapper">
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" id="sidebarCollapse" class="navbar-btn">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+<!--  <nav class="navbar navbar-inverse">-->
+<!--    <div class="container-fluid">-->
+<!--      <div class="navbar-header">-->
+<!--        <button type="button" id="sidebarCollapse" class="navbar-btn">-->
+<!--          <span></span>-->
+<!--          <span></span>-->
+<!--          <span></span>-->
+<!--        </button>-->
 
-        <!--      <a class="navbar-brand" href="#">WebSiteName</a>-->
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a [routerLink]="['/login']">Logout</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-      </ul>
-    </div>
-  </nav>
+<!--        &lt;!&ndash;      <a class="navbar-brand" href="#">WebSiteName</a>&ndash;&gt;-->
+<!--      </div>-->
+<!--      <ul class="nav navbar-nav">-->
+<!--        <li class="active"><a href="#">Home</a></li>-->
+<!--        <li><a [routerLink]="['/login']">Logout</a></li>-->
+<!--        <li><a href="#">Page 2</a></li>-->
+<!--        <li><a href="#">Page 3</a></li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </nav>-->
   <!-- Sidebar Holder -->
   <nav id="sidebar">
     <div class="sidebar-header">
-      <img class="profile-pic" src="../../assets/images/default.png">
+      <img class="profile-pic" src="../../assets/images/logo.png">
     </div>
 
     <ul class="list-unstyled components">
       <li>
-        <a href="#">Portfolio</a>
+        <a [routerLink]="['/dashboard']">Tablica</a>
+      </li>
+      <li>
+        <a [routerLink]="['/profile']">Twój profil</a>
       </li>
       <li>
         <a href="#">Contact</a>
@@ -59,11 +62,12 @@
 
 <!--    <nav class="navbar navbar-default">-->
       <div style="width: 100%; height: 100%; border: 2px solid red">
+        <router-outlet></router-outlet>
 
-        <app-chat></app-chat>
-        <app-users></app-users>
+<!--        <app-chat></app-chat>-->
+<!--        <app-users></app-users>-->
 <!--        <app-heroes></app-heroes>-->
-        <app-friends></app-friends>
+<!--        <app-friends></app-friends>-->
 <!--        <app-heroes></app-heroes>-->
 <!--        <app-heroes></app-heroes>-->
 <!--        <app-friends></app-friends>-->

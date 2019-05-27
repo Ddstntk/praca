@@ -37,6 +37,13 @@ import {RoutingModule} from "./routing/routing.module";
 // import { LoginComponent } from './login/login.component';
 // import { HomeComponent } from './home/index';
 
+import {
+  MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatListModule, MatSidenavModule,
+  MatTooltipModule
+} from '@angular/material';
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {NavbarComponent} from "./navbar/navbar.component";
+
 
 @NgModule({
   declarations: [
@@ -49,8 +56,17 @@ import {RoutingModule} from "./routing/routing.module";
       // DashboardComponent,
       ChatComponent,
       LoginComponent,
+      NavbarComponent
   ],
   imports: [
+    MatGridListModule,
+    MatButtonModule,
+    MatCardModule,
+    MatListModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,

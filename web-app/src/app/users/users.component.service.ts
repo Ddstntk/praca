@@ -12,24 +12,8 @@ export class UsersComponentService {
         return this.http.get('api/user/profile');
     }
 
-    viewAction(friendId): Observable<any> {
-        return this.http.get('api/user/view/' + friendId);
-    }
-
-    indexAction(): Observable<any> {
-        return this.http.get('api/user/index');
-    }
-
-    editAction(body): Observable<any> {
-        return this.http.post('api/user/edit', body);
-    }
-
-    passwordAction(body): Observable<any> {
-        return this.http.post('api/user/password', body);
-    }
-
-    idAction(): Observable<any> {
-        return this.http.get('api/user/id');
+    userAction(id): Observable<any> {
+        return this.http.get('api/user/view/' + id);
     }
 }
 

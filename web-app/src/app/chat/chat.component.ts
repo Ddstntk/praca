@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatComponentService } from "./chat.component.service";
-import { UsersComponentService } from "../users/users.component.service";
+// import { UsersComponentService } from "../users/users.component.service";
+import {UsersComponentService} from "../dashboard/cards/dashboard-users/dashboard-users.component.service";
 
 @Component({
   selector: 'app-chat',
@@ -15,6 +16,7 @@ export class ChatComponent implements OnInit {
   chats = [];
   chatSelected: number;
   messages: any;
+  partner: any;
 
   constructor(private chatService: ChatComponentService, private userService: UsersComponentService) { }
 
@@ -28,9 +30,11 @@ export class ChatComponent implements OnInit {
     });
   }
 
+
   indexAction(chat) {
     this.chatService.indexAction(chat).subscribe(data => {
-      this.messages=data.messagesIndexed.data;
+      // this.messages=data.messagesIndexed.data;
+      // alert(data.messagesIndexed.partner[0].name);
       // alert(JSON.stringify(this.messages))
     });
   }
@@ -43,7 +47,7 @@ export class ChatComponent implements OnInit {
 
   newAction(id) {
     this.chatService.newAction(id).subscribe(data => {
-      this.idAction();
+      // this.idAction();
     });
   }
 
@@ -57,10 +61,10 @@ export class ChatComponent implements OnInit {
     this.chatSelected = value;
   }
 
-  idAction() {
-    this.userService.idAction().subscribe(data => {
-      alert(data.id)
-      return data
-    })
-  }
+  // idAction() {
+  //   this.userService.idAction().subscribe(data => {
+  //     alert(data.id)
+  //     return data
+  //   })
+  // }
 }

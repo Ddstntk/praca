@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersComponentService } from "./users.component.service";
+import {Router, ActivatedRoute, Params} from '@angular/router';
+
 
 @Component({
   selector: 'app-users',
@@ -8,42 +10,38 @@ import { UsersComponentService } from "./users.component.service";
   providers: [UsersComponentService]
 })
 export class UsersComponent implements OnInit {
-  friends: any;
+  user: any;
+  userId: any;
+  buttons = false;
 
-  constructor(private userService: UsersComponentService) { }
+  constructor(private userService: UsersComponentService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.userId = this.route.snapshot.paramMap.get('id');
+    this.getProfileAction();
     // this.friends = this.friendsService.indexAction();
     // alert(JSON.stringify(this.friends));
   }
 
-  indexAction() {
-    this.userService.indexAction().subscribe(data => {
-
-    });
-  }
-
-  profileAction() {
+  getProfileAction() {
+    if(this.userId == null){
       this.userService.profileAction().subscribe(data => {
-
+        this.user = data.userView;
+        this.buttons = false;
+      });
+    } else {
+      this.userService.userAction(this.userId).subscribe(data => {
+        this.user = data.userView;
+        this.buttons = true;
       });
     }
-
-  viewAction() {
-    this.userService.viewAction(1234).subscribe(data => {
-
-    });
   }
 
-  editAction() {
-    this.userService.editAction({}).subscribe(data => {
+  inviteAction() {
 
-    });
   }
 
-  passwordAction() {
-    this.userService.passwordAction({password: "admin123"}).subscribe(data => {
+  messageAction() {
 
-    });
   }
 }

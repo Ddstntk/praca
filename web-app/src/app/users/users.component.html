@@ -1,13 +1,47 @@
-<div class="component-container">
-  <h2>Users component</h2>
-  <div>
-    <p>
-      friends works!
-      <button (click)="indexAction();">INDEX ACTION TEST</button>
-      <button (click)="profileAction();">PROFILE TEST</button>
-      <button (click)="viewAction();">VIEW TEST</button>
-<!--      <button (click)="editAction();">EDIT USER TEST</button>-->
-      <button (click)="passwordAction();">CHANGE PSWD TEST</button>
-    </p>
-  </div>
-</div>
+<mat-sidenav-container style="min-height: 100%;" fxFlex>
+  <!--  <mat-sidenav [opened]="true" mode="side">-->
+  <!--    <mat-list>-->
+  <!--      <mat-list-item *ngFor="let card of cards">-->
+  <!--        <button mat-icon-button matTooltip="{{card.input.name.value}}" [matTooltipPosition]="'right'"-->
+  <!--                [matTooltipClass]="'dash-tooltip-class'">-->
+  <!--          <mat-icon style="margin: auto;" class="fa" ngClass="{{card.input.iconClass.value}}"></mat-icon>-->
+  <!--        </button>-->
+  <!--      </mat-list-item>-->
+  <!--    </mat-list>-->
+  <!--  </mat-sidenav>-->
+
+  <mat-sidenav-content style="min-height: 100%;">
+    <mat-grid-list [cols]="18">
+      <mat-grid-tile
+                     [colspan]="18"
+                     [rowspan]="11">
+<!--        <app-dashboard-cards-spawner [card]="card"></app-dashboard-cards-spawner>--><mat-card style="margin: 15px;" class="mat-elevation-z15" fxFlex fxLayoutAlign="space-between" fxLayout="column">
+          <mat-card-header>
+              <p>Profile</p>
+          </mat-card-header>
+          <mat-card-content fxLayout="column" fxLayoutAlign="space-between" fxFlex>
+              <div style="text-align: center">
+                  <img  class="profile-pic" src="../../assets/images/default.png">
+              </div>
+              <div style="text-align: center;">
+                  <p>{{user.name}} {{user.surname}}</p>
+                  <p>{{user.email}}</p>
+                  <p>{{user.birthDate}}</p>
+
+                  <p>{{user.description}}</p>
+                  <div *ngIf="buttons && isFriend">
+                      <button class="btn btn-warning" (click)="messageAction()" [routerLink]="['/dashboard/']">Rozpocznij czat</button>
+                  </div>
+                  <div *ngIf="buttons && !isFriend">
+                      <button class="btn btn-warning" (click)="inviteAction()" [routerLink]="['/dashboard/']">Zaproś do znajomych</button>
+                  </div>
+              </div>
+          </mat-card-content>
+
+      </mat-card>
+
+
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-sidenav-content>
+</mat-sidenav-container>
