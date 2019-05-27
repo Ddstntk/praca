@@ -54,14 +54,36 @@ class ApiUserController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
+        $controller->get('/id', [$this, 'idAction']);
         $controller->get('/profile', [$this, 'profileAction']);
         $controller->get('/view/{id}', [$this, 'viewAction']);
-        $controller->get('/index', [$this, 'indexAction']);
+        $controller->match('/index', [$this, 'indexAction'])
+        ->method('GET|POST');
         $controller->match('/edit', [$this, 'editAction'])
             ->method('GET|POST');
         $controller->match('/password', [$this, 'changePassword'])
             ->method('GET|POST');
         return $controller;
+    }
+
+    /**
+     * Id action
+     *
+     * @param Application $app  Application
+     * @param int         $page Page
+     *
+     * @return mixed
+     */
+    public function idAction(Application $app, $page = 1)
+    {
+        $userRepository = new UserRepository($app['db']);
+        $friendsRepository = new FriendsRepository($app['db']);
+        $userId = $app['security.token_storage']->getToken()->getUser()->getID();
+
+        $response = new JsonResponse(array('userId' => $userId));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+
     }
 
     /**
@@ -72,13 +94,40 @@ class ApiUserController implements ControllerProviderInterface
      *
      * @return mixed
      */
-    public function indexAction(Application $app, $page = 1)
+    public function indexAction(Application $app, Request $request, $page = 1)
     {
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+        $filter = $request->request->get('filter');
         $userRepository = new UserRepository($app['db']);
         $friendsRepository = new FriendsRepository($app['db']);
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
 
-        $response = new JsonResponse(array('usersIndexed' => $userRepository->findAllPaginated($friendsRepository, $userId, $page)));
+        $usersPaginated = $userRepository->findAllPaginated($friendsRepository, $userId, $page);
+//        var_dump($usersPaginated);
+        $result = [];
+
+        if($filter){
+            foreach ($usersPaginated['data'] as $rkey => $user){
+//                var_dump($filter);
+//
+//                var_dump($user['name']);
+//                var_dump((strpos($user['name'], $filter) !== false));
+//                var_dump($user['surname']);
+//                var_dump((strpos($user['surname'], $filter) !== false));
+                if ((stripos($user['name'], $filter) !== false) || (stripos($user['surname'], $filter) !== false)){
+                    $result['data'][] = $user;
+//                    var_dump("Wchodzę bo prawda");
+                }
+            }
+        } else {
+            $result = $usersPaginated;
+        }
+
+//        var_dump($result);
+        $response = new JsonResponse(array('usersIndexed' => $result));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
 

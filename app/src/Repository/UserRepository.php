@@ -262,14 +262,13 @@ class UserRepository
             ->select('COUNT(DISTINCT k.PK_idUsers) AS total_results')
             ->setMaxResults(1);
 
-
         $paginator = new Paginator(
             $this
             ->findStrangers($friendsRepository, $userId),
             $countQueryBuilder
         );
         $paginator->setCurrentPage($page);
-        $paginator->setMaxPerPage(100);
+        $paginator->setMaxPerPage(50);
 
         return $paginator->getCurrentPageResults();
     }
@@ -398,12 +397,14 @@ class UserRepository
             'k.surname',
             'k.photo',
             'k.role_id',
-            'k.birthDate'
+            'k.birthDate',
+            'f.FK_idUserB as isFriend'
         )
+            ->leftJoin('k', '(SELECT * FROM friends WHERE FK_idUserB = :userId)', 'f', 'k.PK_idUsers = f.FK_idUserA')
             ->from('users', 'k')
 //            ->where($queryBuilder -> expr()->notIn('k.PK_idUsers', $friends))
-            ->andWhere('k.PK_idUsers <> :userId')
-            ->setParameters(array(':userId' => $userId, ':friendId' => 1));
+            ->where('k.PK_idUsers <> :userId')
+            ->setParameters(array(':userId' => $userId));
     }
 
     /**
@@ -419,6 +420,7 @@ class UserRepository
             'u.PK_idUsers',
             'u.name',
             'u.surname',
+            'u.description',
             'u.email',
             'u.photo',
             'u.role_id',

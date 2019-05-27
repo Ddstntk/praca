@@ -15,8 +15,10 @@
  */
 namespace Api;
 
+use Repository\ChatRepository;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Repository\PostsRepository;
 use Form\PostType;
@@ -77,17 +79,21 @@ class ApiPostsController implements ControllerProviderInterface
 
         $post = [];
 
-        $form = $app['form.factory']->createBuilder(
-            PostType::class,
-            $post
-        )->getForm();
+//        $form = $app['form.factory']->createBuilder(
+//            PostType::class,
+//            $post
+//        )->getForm();
 
-        return $app['twig']->render(
-            'posts/index.html.twig',
-            ['paginator' => $postsRepository->findAllPaginated($userId, $page),
-                'form' => $form->createView(),
-            ]
-        );
+//        return $app['twig']->render(
+//            'posts/index.html.twig',
+//            ['paginator' => $postsRepository->findAllPaginated($userId, $page),
+//                'form' => $form->createView(),
+//            ]
+//        );
+
+        $response = new JsonResponse(array('postsIndexed' => $postsRepository->findAllPaginated($userId, $page)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
 
@@ -106,25 +112,42 @@ class ApiPostsController implements ControllerProviderInterface
         $post = [];
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
 
-        $form = $app['form.factory']->createBuilder(
-            PostType::class,
-            $post
-        )->getForm();
-        $form->handleRequest($request);
+//        $form = $app['form.factory']->createBuilder(
+//            PostType::class,
+//            $post
+//        )->getForm();
+//        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $postsRepository = new PostsRepository($app['db']);
-            $postsRepository->save($form->getData(), $userId);
-
-            $app['session']->getFlashBag()->add(
-                'messages',
-                [
-                    'type' => 'success',
-                    'message' => 'message.element_successfully_added',
-                ]
-            );
-
-            return $app->redirect($app['url_generator']->generate('posts_index_paginated'), 301);
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
         }
+//        var_dump($request);
+
+//        var_dump($request->request->get('password'));
+        $visibility = $request->request->get('visibility');
+        $body = $request->request->get('body');
+//        var_dump($body);
+        $postsRepository = new PostsRepository($app['db']);
+        $postsRepository->save($body, $visibility, $userId);
+
+//        }
+
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $postsRepository = new PostsRepository($app['db']);
+//            $postsRepository->save($form->getData(), $userId);
+//
+//            $app['session']->getFlashBag()->add(
+//                'messages',
+//                [
+//                    'type' => 'success',
+//                    'message' => 'message.element_successfully_added',
+//                ]
+//            );
+//
+//            return $app->redirect($app['url_generator']->generate('posts_index_paginated'), 301);
+//        }
+        return http_response_code(200);
+
     }
 }

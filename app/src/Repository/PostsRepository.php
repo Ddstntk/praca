@@ -133,7 +133,7 @@ class PostsRepository
      *
      * @return nothing
      */
-    public function save($post, $userId)
+    public function save($body, $visibility, $userId)
     {
         $this->db->beginTransaction();
 
@@ -149,6 +149,8 @@ class PostsRepository
                 $this->db->update('posts', $post, ['id' => $postId]);
             } else {
                 // add new record
+                $post['content'] = $body;
+                $post['visibility'] = $visibility   ;
                 $post['created_at'] = $currentDateTime->format('Y-m-d H:i:s');
                 $post['FK_idUsers'] = $userId;
                 $this->db->insert('posts', $post);

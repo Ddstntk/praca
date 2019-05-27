@@ -93,54 +93,67 @@ class ApiChatController implements ControllerProviderInterface
     {
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
 
-        $conversation = [];
-        $friendList = [];
-        $friendsRepository = new friendsRepository($app['db']);
-
-        $friends = $friendsRepository -> friendsNames($userId);
-
-        foreach ($friends as $k) {
-            $fullname = $k['name'].' '.$k['surname'];
-            $friendList[$fullname] = $k['PK_idUsers'];
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
         }
+//        var_dump($request);
 
-        $form = $app['form.factory']->createBuilder(
-            ChatType::class,
-            $conversation,
-            array(
-                'data' => $friendList,
-                )
-        )->getForm();
-        $form->handleRequest($request);
+//        var_dump($request->request->get('password'));
+        $messaged = $request->request->get('messaged');
+//        $body = $request->request->get('body');
 
-        $id = 2;
 
-        if ($form->isSubmitted()) {
+//        $conversation = [];
+//        $friendList = [];
+//        $friendsRepository = new friendsRepository($app['db']);
+//
+//        $friends = $friendsRepository -> friendsNames($userId);
+//
+//        foreach ($friends as $k) {
+//            $fullname = $k['name'].' '.$k['surname'];
+//            $friendList[$fullname] = $k['PK_idUsers'];
+//        }
+
+//        $form = $app['form.factory']->createBuilder(
+//            ChatType::class,
+//            $conversation,
+//            array(
+//                'data' => $friendList,
+//                )
+//        )->getForm();
+//        $form->handleRequest($request);
+//
+//        $id = 2;
+
+//        if ($form->isSubmitted()) {
             $chatRepository = new ChatRepository($app['db']);
-            $chatRepository->addChat($form->getData(), $id, $userId);
+            $chatRepository->addChat($messaged, $userId);
 
-            $app['session']->getFlashBag()->add(
-                'conversations',
-                [
-                    'type' => 'success',
-                    'message' => 'message.chat_created',
-                ]
-            );
+//            $app['session']->getFlashBag()->add(
+//                'conversations',
+//                [
+//                    'type' => 'success',
+//                    'message' => 'message.chat_created',
+//                ]
+//            );
+//
+//            return $app->redirect(
+//                $app['url_generator']
+//                ->generate('chat_index'),
+//                301
+//            );
+//        }
 
-            return $app->redirect(
-                $app['url_generator']
-                ->generate('chat_index'),
-                301
-            );
-        }
+//        return $app['twig']->render(
+//            'chat/new.html.twig',
+//            [
+//            //                'conversation' => $conversation,
+//                'form' => $form->createView(),
+//            ]
+//        );
+        return http_response_code(200);
 
-        return $app['twig']->render(
-            'chat/new.html.twig',
-            [
-            //                'conversation' => $conversation,
-                'form' => $form->createView(),
-            ]
-        );
     }
 
     /**

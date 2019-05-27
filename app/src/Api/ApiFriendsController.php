@@ -42,6 +42,7 @@ class ApiFriendsController implements ControllerProviderInterface
 {
     /**
      * Routing settings
+     * Routing settings
      *
      * @param Application $app Application
      *
@@ -111,8 +112,9 @@ class ApiFriendsController implements ControllerProviderInterface
     {
         $friendsRepository = new FriendsRepository($app['db']);
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
-
-        $response = new JsonResponse(array('result' => $friendsRepository->addFriend($userId, $friendId)));
+        $friendsRepository->addFriend($userId, $friendId);
+//        $response = new JsonResponse(array('result' => $friendsRepository->addFriend($userId, $friendId)));
+        $response = new JsonResponse(array('result' => 2));
 
         $response->headers->set('Content-Type', 'application/json');
         return $response;
@@ -132,7 +134,7 @@ class ApiFriendsController implements ControllerProviderInterface
         $friendsRepository = new FriendsRepository($app['db']);
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
 
-        $response = new JsonResponse(array('friendsIndexed' => $friendsRepository->findFriends($userId, $page)));
+        $response = new JsonResponse(array('friendsIndexed' => $friendsRepository->getFriends($userId, $page)));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
 

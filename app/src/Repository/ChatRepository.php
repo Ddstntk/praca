@@ -112,7 +112,8 @@ class ChatRepository
                 ->where(
                     'p.FK_idConversations = :id'
                 )
-                ->setParameters(array(':id' => $convId));
+                ->andWhere('p.FK_idUsers != :userId')
+                ->setParameters(array(':id' => $convId, ':userId' => $userId));
 
             $usersList[$key] = $queryBuilder->execute()->fetchAll();
         }
@@ -199,13 +200,19 @@ class ChatRepository
             ->setMaxResults(static::NUM_ITEMS);
 
         $pagesNumber = $this->countAllPages($userId, $id);
-
-
+        $partnerQuery = $this->db->createQueryBuilder();
+        $partnerQuery->select('p.FK_idUsers', 'u.name', 'u.surname')
+            ->from('participants', 'p')
+            ->innerJoin('p', 'users', 'u', 'p.FK_idUsers = u.PK_idUsers')
+            ->where('p.FK_idConversations = :id')
+            ->andWhere('p.FK_idUsers <> :userId')
+            ->setParameters(array(':id' => $id, ':userId' => $userId));
         $paginator = [
             'page' => ($page < 1 || $page > $pagesNumber) ? 1 : $page,
             'max_results' => static::NUM_ITEMS,
             'pages_number' => $pagesNumber,
             'data' => $queryBuilder->execute()->fetchAll(),
+            'partner' => $partnerQuery->execute()->fetchAll()
         ];
 
         return $paginator;
@@ -288,23 +295,33 @@ class ChatRepository
             $conversation['FK_idUsers'] = $userId;
             $this->db->insert('conversations', $conversation);
             $lastInsert = $this->db->lastInsertId();
+//            $this->db->commit();
+            $data['FK_idConversations'] = $lastInsert;
+
+            $data['FK_idUsers'] = $userId;
+            $this->db->insert('participants', $data);
+            $data['FK_idUsers'] = $participants;
+            $this->db->insert('participants', $data);
             $this->db->commit();
         } catch (DBALException $e) {
             $this->db->rollBack();
             throw $e;
         }
-
-        $data['FK_idConversations'] = $lastInsert;
-
-        $data['FK_idUsers'] = $userId;
-        $this->db->insert('participants', $data);
-        foreach ($participants['selectUsers'] as $p) {
-            //            $this->db->beginTransaction();
-
-            $data['FK_idUsers'] = $p;
-            $this->db->insert('participants', $data);
-            //            $this->db->commit();
-        }
+//
+//        $data['FK_idConversations'] = $lastInsert;
+//
+//        $data['FK_idUsers'] = $userId;
+//        $this->db->insert('participants', $data);
+//        $data['FK_idUsers'] = $participants;
+//        $this->db->insert('participants', $data);
+//        $this->db->commit();
+//        foreach ($participants['selectUsers'] as $p) {
+//            //            $this->db->beginTransaction();
+//
+//            $data['FK_idUsers'] = $p;
+//            $this->db->insert('participants', $data);
+//            //            $this->db->commit();
+//        }
     }
 
     /**

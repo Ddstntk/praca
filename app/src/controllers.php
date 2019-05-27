@@ -24,7 +24,7 @@ use Controller\PhotosController;
 use Controller\AdminController;
 
 use Api\ApiUserController;
-//use Api\ApiPostsController;
+use Api\ApiPostsController;
 use Api\ApiAuthController;
 use Api\ApiChatController;
 use Api\ApiFriendsController;
@@ -62,7 +62,7 @@ $app->mount('/photo', new PhotosController());
 $app->mount('/admin', new AdminController());
 
 $app->mount('/api/user', new ApiUserController());
-//$app->mount('/api/posts', new ApiPostsController());
+$app->mount('/api/posts', new ApiPostsController());
 $app->mount('/api/auth', new ApiAuthController());
 $app->mount('/api/chat', new ApiChatController());
 $app->mount('/api/friend', new ApiFriendsController());

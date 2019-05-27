@@ -163,12 +163,15 @@ class FriendsRepository
             ->where('f.FK_idUserB = :userId')
             ->andWhere('f.FK_idUserA = :friendId')
             ->setParameters(array(':userId' => $userId, ':friendId' => $friendId))->execute()->fetchAll();
-
-        echo($assertInvited[0]['total_results']);
-        echo($assertNotFriends[0]['total_results']);
-
-        if($assertInvited == 0 && $assertNotFriends == 1) {
+//        echo("invited?");
+//        echo($assertInvited[0]['total_results']);
+//        echo("notfriends?");
+//        echo($assertNotFriends[0]['total_results']);
+//        var_dump($assertInvited);
+//        var_dump($assertNotFriends);
+        if($assertInvited[0]['total_results']== 1 && $assertNotFriends[0]['total_results'] == 0) {
             try {
+//                echo("chybaok");
                 $relation = [];
 
                 $this->db->beginTransaction();
@@ -184,9 +187,12 @@ class FriendsRepository
                 $queryBuilder = $this->db->createQueryBuilder();
 
                 $queryBuilder -> delete('invitations')
-                    ->where('FK_idUserA = '.$userId)
-                    ->andWhere('FK_idUserB = '.$friendId)
-                    ->execute();
+                    ->where('FK_idUserB = :userId')
+                    ->andWhere('FK_idUserA = :friendId')
+                    ->setParameters(array(':userId' => $userId, ':friendId' => $friendId))
+                ->execute();
+
+
                 $this->db->commit();
 
                 $this->db->beginTransaction();
@@ -201,9 +207,10 @@ class FriendsRepository
                 $queryBuilder = $this->db->createQueryBuilder();
 
                 $queryBuilder -> delete('invitations')
-                    ->where('FK_idUserB = '.$userId)
-                    ->andWhere('FK_idUserA = '.$friendId)
-                    ->execute();
+                    ->where('FK_idUserB = :friendId')
+                    ->andWhere('FK_idUserA = :userId')
+                    ->setParameters(array(':userId' => $userId, ':friendId' => $friendId))
+                ->execute();
                 $this->db->commit();
                 $result = true;
             } catch (DBALException $e) {
@@ -321,7 +328,9 @@ class FriendsRepository
             ->from('users', 'y')
             ->innerJoin('y', 'friends', 'f', 'y.PK_idUsers = f.FK_idUserA')
             ->innerJoin('f', 'users', 'u', 'u.PK_idUsers = f.FK_idUserB')
-            ->where('u.PK_idUsers = '.$userId);
+            ->where('u.PK_idUsers = :userId')
+            ->setParameters(array(':userId' => $userId));
+
     }
 
     /**
@@ -389,14 +398,31 @@ class FriendsRepository
             'y.surname',
             'y.photo',
             'y.role_id',
-            'y.birthDate'
+            'y.birthDate',
+            'x.FK_idUserB as isFriend'
         )
             ->from('users', 'y')
             ->innerJoin('y', 'friends', 'f', 'y.PK_idUsers = f.FK_idUserA')
             ->innerJoin('f', 'users', 'u', 'u.PK_idUsers = f.FK_idUserB')
+            ->leftJoin('u', '(SELECT * FROM friends WHERE FK_idUserB = :userId)', 'x', 'u.PK_idUsers = x.FK_idUserA')
             ->where('u.PK_idUsers = :userId')
-            ->setParameters(array(':userId' => $userId))->execute()->fetchAll();
+            ->setParameters(array(':userId' => $userId));
     }
+
+
+    /**
+     * Get all friends
+     *
+     * @param User $userId Id
+     *
+     * @return \Doctrine\DBAL\Query\QueryBuilder
+     */
+    public function getFriends($userId)
+    {
+        $query = $this->findFriends($userId);
+        return $query->execute()->fetchAll();
+    }
+
 
     /**
      * Find all invites
