@@ -1,0 +1,89 @@
+<div class="wrapper">
+
+    <div id="content" style="width: 100%">
+        <div style="width: 100%; height: 100%; border: 2px solid red">
+
+
+
+
+        <mat-sidenav-container style="min-height: 100%;" fxFlex>
+
+    <mat-sidenav-content style="min-height: 100%;">
+        <mat-grid-list [cols]="18" >
+            <mat-grid-tile [colspan]="4"></mat-grid-tile>
+            <mat-grid-tile
+                    [colspan]="10"
+                    [rowspan]="8">
+                <mat-card style="margin: 15px;" class="mat-elevation-z15" fxFlex fxLayoutAlign="center" fxLayout="column">
+                <mat-card-header>
+                    <p>Rejestracja {{imageId}}</p>
+<!--                    <div fxLayout="column">-->
+<!--                        <img style="margin: 20px" mat-card-lg-image src="assets/images/logo.png">-->
+<!--                    </div>-->
+                </mat-card-header>
+                <mat-card-content fxLayoutAlign="center">
+                    <img mat-card-lg-image src="assets/images/logo.png" style="margin: 20px">
+
+                    <div fxLayout="column">
+                        <input placeholder="Imię" [(ngModel)]="name" (change)="validate()">
+                            <input placeholder="Nazwisko" [(ngModel)]="surname" (change)="validate()">
+                            <input type="email" placeholder="E-mail" [(ngModel)]="email" (change)="validate()">
+                            <input type="password" placeholder="Hasło" [(ngModel)]="password" (change)="validate()">
+                            <input type="password" placeholder="Powtórz Hasło" [(ngModel)]="passwordCheck" (change)="validate()">
+                            <textarea placeholder="Opis" [(ngModel)]="description" (change)="validate()"></textarea>
+<!--                            <div fxLayout="row">&ndash;&gt;-->
+<!--                                <select [(ngModel)]="birthYear">-->
+<!--                                    <option *ngFor="let year of yearList" value="year" >{{year}}</option>-->
+<!--                                </select>-->
+<!--                                <select [(ngModel)]="birthMonth">-->
+<!--                                    <option *ngFor="let month of monthList" value="year" >{{year}}</option>-->
+<!--                                </select>-->
+<!--                                <select [(ngModel)]="birthDay">-->
+<!--                                    <option *ngFor="let day of dayList" value="year" >{{year}}</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+                        <div fxLayout="row">
+                            <input matInput [matDatepicker]="picker" placeholder="Data urodzin" [(ngModel)]="birthDate" (change)="validate()">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </div>
+                        <button class="btn btn-primary" [disabled]="!userValid" (click)="addUser()">Zarejestruj się</button>
+                    </div>
+                    <div style="max-height: 400px; margin-left: 20px; margin-bottom: 20px;" fxLayout="column">
+                        Wybierz swojego avatara:
+                        <div style="overflow:scroll;" fxLayout="column">
+                            <label *ngFor="let imageId of avatarList" (click)="setImage(imageId)" (change)="validate()">
+                                <div style="margin-bottom: 20px" >
+                                    <input name="cb" id="cb" [value]="imageId" type="radio">
+                                    <img mat-card-sm-image src="assets/avatars/{{imageId}}.svg">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </mat-card-content>
+<!--                <div>-->
+<!--                    <div fxLayout="row">-->
+<!--                        <div style="background: red" fxLayout="column">chat</div>-->
+<!--                        <div style="background: blue" fxLayout="column">posts</div>-->
+<!--                    </div>-->
+<!--                    <div fxLayout="row">-->
+<!--                        <div style="background: green" fxLayout="column">friends</div>-->
+<!--                        <div style="background: blueviolet" fxLayout="column">users</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </mat-card>
+
+
+            </mat-grid-tile>
+<!--            <mat-grid-tile [colspan]="4"></mat-grid-tile>-->
+
+        </mat-grid-list>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+        </div>
+
+
+
+    </div>
+</div>
+

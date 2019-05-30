@@ -14,6 +14,10 @@ export class DashboardCardsService {
     this._cards.next(this._cards.getValue().concat(card));
   }
 
+  destroyCards(): void {
+    this._cards = new BehaviorSubject<DashboardCard[]>([]);
+  }
+
   get cards(): BehaviorSubject<DashboardCard[]> {
     return this._cards;
   }

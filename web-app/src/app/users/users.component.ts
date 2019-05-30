@@ -41,7 +41,5 @@ export class UsersComponent implements OnInit {
 
   }
 
-  messageAction() {
-
-  }
+  messageAction() {}
 }

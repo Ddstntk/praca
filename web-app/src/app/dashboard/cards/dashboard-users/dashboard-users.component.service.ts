@@ -35,6 +35,10 @@ export class UsersComponentService {
     loginAction(friendId): Observable<any> {
         return this.http.post('auth/login', friendId);
     }
+
+    getConfigAction(): Observable<any> {
+        return this.http.get('api/user/config');
+    }
 }
 
 // $controller->get('/invite/{friendId}', [$this, 'apiInviteAction']);

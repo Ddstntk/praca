@@ -2,5 +2,13 @@
   "/api": {
   "target": "http://localhost:8888",
       "secure": false
-}
+},
+  "/auth_logout": {
+    "target": "http://localhost:8888/",
+    "secure": false
+  },
+  "/auth_login_check": {
+    "target": "http://localhost:8888/",
+    "secure": false
+  }
 }

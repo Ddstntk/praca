@@ -1,52 +1,32 @@
-<!--<div class="wrapper">-->
+<div class="wrapper">
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <img class="profile-pic" src="../../assets/images/logo.png">
+    </div>
 
-<!--&lt;!&ndash;<nav class="navbar navbar-inverse">&ndash;&gt;-->
-<!--&lt;!&ndash;  <div class="container-fluid">&ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="navbar-header">&ndash;&gt;-->
-<!--&lt;!&ndash;      <button type="button" id="sidebarCollapse" class="navbar-btn">&ndash;&gt;-->
-<!--&lt;!&ndash;        <span></span>&ndash;&gt;-->
-<!--&lt;!&ndash;        <span></span>&ndash;&gt;-->
-<!--&lt;!&ndash;        <span></span>&ndash;&gt;-->
-<!--&lt;!&ndash;      </button>&ndash;&gt;-->
+    <ul class="list-unstyled components">
+      <li>
+        <a [routerLink]="['/dashboard']">Tablica</a>
+      </li>
+      <li>
+        <a [routerLink]="['/profile']">Twój profil</a>
+      </li>
+      <li>
+        <a [routerLink]="['/config']">Konfiguruj wygląd</a>
+      </li>
+      <li>
+        <a [routerLink]="['/logout']">Wyloguj</a>
+      </li>
+    </ul>
+  </nav>
 
-<!--&lt;!&ndash;      &lt;!&ndash;      <a class="navbar-brand" href="#">WebSiteName</a>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    <ul class="nav navbar-nav">&ndash;&gt;-->
-<!--&lt;!&ndash;      <li class="active"><a href="#">Home</a></li>&ndash;&gt;-->
-<!--&lt;!&ndash;      <li><a [routerLink]="['/login']">Logout</a></li>&ndash;&gt;-->
-<!--&lt;!&ndash;      <li><a href="#">Page 2</a></li>&ndash;&gt;-->
-<!--&lt;!&ndash;      <li><a href="#">Page 3</a></li>&ndash;&gt;-->
-<!--&lt;!&ndash;    </ul>&ndash;&gt;-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-<!--&lt;!&ndash;</nav>&ndash;&gt;-->
-<!--<nav id="sidebar">-->
-<!--  <div class="sidebar-header">-->
-<!--    <img class="profile-pic" src="../../assets/images/default.png">-->
-<!--  </div>-->
+  <div id="content" style="width: 100%">
+    <div style="width: 100%; height: 100%; border: 2px solid red">
 
-<!--  <ul class="list-unstyled components">-->
-<!--    <li>-->
-<!--      <a style="text-align: center" href="#">Profil</a>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--      <a style="text-align: center">Wyloguj</a>-->
-<!--    </li>-->
-<!--  </ul>-->
-<!--</nav>-->
-<!--<div id="content" style="width: 100%">-->
+
+
 
 <mat-sidenav-container style="min-height: 100%;" fxFlex>
-<!--  <mat-sidenav [opened]="true" mode="side">-->
-<!--    <mat-list>-->
-<!--      <mat-list-item *ngFor="let card of cards">-->
-<!--        <button mat-icon-button matTooltip="{{card.input.name.value}}" [matTooltipPosition]="'right'"-->
-<!--                [matTooltipClass]="'dash-tooltip-class'">-->
-<!--          <mat-icon style="margin: auto;" class="fa" ngClass="{{card.input.iconClass.value}}"></mat-icon>-->
-<!--        </button>-->
-<!--      </mat-list-item>-->
-<!--    </mat-list>-->
-<!--  </mat-sidenav>-->
-
   <mat-sidenav-content>
     <mat-grid-list [cols]="cols | async">
       <mat-grid-tile *ngFor="let card of cards"
@@ -57,5 +37,10 @@
     </mat-grid-list>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<!--</div>-->
-<!--</div>-->
+    </div>
+
+
+
+  </div>
+</div>
+

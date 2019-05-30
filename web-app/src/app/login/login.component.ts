@@ -30,15 +30,38 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
-            .first()
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.error = error;
-                    this.loading = false;
-                });
+        var formData = new FormData();
+
+        formData.append("login_type[email]", this.model.username);
+        formData.append("login_type[password]",this.model.password);
+        this.authenticationService.serverLogin(formData).subscribe(
+            data => {
+                this.authenticationService.login(this.model.username, this.model.password)
+                    .first()
+                    .subscribe(
+                        data => {
+                            this.router.navigate([this.returnUrl]);
+                        },
+                        error => {
+                            this.error = error;
+                            this.loading = false;
+                        });
+            },
+            error => {
+                this.error = error;
+                this.loading = false;
+            });
+        // this.authenticationService.login(this.model.username, this.model.password)
+        //     .first()
+        //     .subscribe(
+        //         data => {
+        //             this.router.navigate([this.returnUrl]);
+        //         },
+        //         error => {
+        //             this.error = error;
+        //             this.loading = false;
+        //         });
+        // {"Form data":{"login_type[email]":"admin@admin.com","login_type[password]":"admin123"}}
+
     }
 }

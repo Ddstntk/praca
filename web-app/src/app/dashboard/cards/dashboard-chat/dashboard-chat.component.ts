@@ -45,9 +45,9 @@ export class DashboardChatComponent extends AbstractDashboardCard implements OnI
   }
 
   listenForMessages() {
-    return setInterval(()=>{
-      this.allAction()
-    }, 10000)
+    // return setInterval(()=>{
+    //   this.allAction()
+    // }, 10000)
   }
 
   styleObject(message): Object {

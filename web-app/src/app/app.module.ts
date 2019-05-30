@@ -5,7 +5,7 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/h
 
 //LAYOUT
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
+// import { HeroesComponent } from './heroes/heroes.component';
 import { LayoutComponent } from './layout/layout.component';
 import { FriendsComponent } from './friends/friends.component';
 
@@ -22,11 +22,11 @@ import {UserService} from "./_services/user.service";
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {fakeBackendProvider} from "./_helpers/fake-backend";
 import {routing} from "./app.routing";
-import {HomeComponent} from "./home/home.component";
+// import {HomeComponent} from "./home/home.component";
 // import {DashboardComponent} from "./dashboard/dashboard/dashboard.component";
 //WINDOWS
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material';
+import {MatNativeDateModule, MatToolbarModule} from '@angular/material';
 // import {DashboardComponent} from "./dashboard/dashboard/dashboard.component";
 import {RoutingModule} from "./routing/routing.module";
 
@@ -43,22 +43,38 @@ import {
 } from '@angular/material';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {NavbarComponent} from "./navbar/navbar.component";
+import {ConfigComponent} from "./config/config.component";
+import {ConfigComponentService} from "./config/config.component.service";
+import {LogoutComponent} from "./logout";
+import {RegisterComponent} from "./register/register.component";
+import {RegisterComponentService} from "./register/register.component.service";
 
 
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
-      HomeComponent,
-    HeroesComponent,
+      // HomeComponent,
+    // HeroesComponent,
     LayoutComponent,
     FriendsComponent,
     UsersComponent,
       // DashboardComponent,
       ChatComponent,
       LoginComponent,
-      NavbarComponent
+      LogoutComponent,
+      RegisterComponent,
+      NavbarComponent,
+      ConfigComponent,
   ],
   imports: [
+      MatFormFieldModule,
+    MatNativeDateModule,
+      MatDatepickerModule,
     MatGridListModule,
     MatButtonModule,
     MatCardModule,
@@ -83,6 +99,9 @@ import {NavbarComponent} from "./navbar/navbar.component";
       AuthGuard,
       AuthenticationService,
       UserService,
+      ConfigComponentService,
+      RegisterComponentService,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

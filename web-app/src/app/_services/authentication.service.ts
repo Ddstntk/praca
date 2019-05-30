@@ -19,8 +19,13 @@ export class AuthenticationService {
             });
     }
 
-    logout() {
-        // remove user from local storage to log user out
+    serverLogin(formData) {
+        return this.http.post<any>('/auth_login_check', formData)
+    }
+
+    logout() : Observable<any> {
         localStorage.removeItem('currentUser');
+        return this.http.get('auth_logout')
+
     }
 }

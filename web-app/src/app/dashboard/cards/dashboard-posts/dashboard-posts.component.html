@@ -6,14 +6,16 @@
           <!--                <option *ngFor="let chat of chats" [value]="chat.FK_idConversations" >{{chat.name}} {{chat.surname}}</option>-->
           <!--            </select>-->
           <button class="btn btn-primary" (click)="addAction(postBody);">SEND TEST</button>
-
+          <button class="btn btn-primary" (click)="pageAction(-1)">previous page</button>
+          <button class="btn btn-default" (click)="pageAction(+1)">next page</button>
           <!--            <button class="btn btn-default" (click)="Action(12);">NEW TEST</button>-->
       </div>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="space-between" fxFlex>
       <div class="component-container" style="height: 100%; overflow-y: scroll; background-color: lightgray" fxFlex>
+<!--          <div *ngFor="let post of posts" class="container" style="max-width: 600px;float: left">-->
 
-          <div *ngFor="let post of posts" class="container" style="max-width: 600px;float: left">
+          <div *ngFor="let post of posts" class="container" style="max-width: 600px; width: 100%;">
               <p style="color: black"><b>{{post.name}} {{post.surname}}</b><b class="time-left">{{post.modified_at}}</b></p>
 
 
@@ -21,8 +23,6 @@
               <p style="color: #0e0e0e">{{post.content}}</p>
           </div>
       </div>
-      <button class="btn btn-primary" (click)="pageAction(-1)">previous page</button>
-      <button class="btn btn-default" (click)="pageAction(+1)">next page</button>
   </mat-card-content>
 
 </mat-card>

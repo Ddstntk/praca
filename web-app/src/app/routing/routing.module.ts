@@ -1,7 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from '../home/home.component';
 import {UsersComponent} from "../users/users.component";
+import {ConfigComponent} from "../config/config.component";
+import {LoginComponent} from "../login";
+import { AuthGuard} from "../_guards";
+import {LayoutComponent} from "../layout/layout.component";
+import {LogoutComponent} from "../logout";
+import {RegisterComponent} from "../register/register.component";
+// import {LayoutComponent} from "./layout/layout.component";
 
 const routes: Routes = [
   {
@@ -9,21 +15,24 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'dashboard'
   },
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
+  {path: 'register', component: RegisterComponent},
   // {
   //   path: 'home',
   //   component: HomeComponent
   // },
   {
     path: 'dashboard',
-    loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
+    loadChildren: 'app/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    redirectTo: 'profile'
+    redirectTo: 'profile', canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    component: UsersComponent
+    component: UsersComponent, canActivate: [AuthGuard]
   },
   // {
   //   path: 'user',
@@ -31,7 +40,15 @@ const routes: Routes = [
   // },
   {
     path: 'view/:id',
-    component: UsersComponent
+    component: UsersComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'config',
+    redirectTo: 'config', canActivate: [AuthGuard]
+  },
+  {
+    path: 'config',
+    component: ConfigComponent, canActivate: [AuthGuard]
   },
   // {
   //   path: '**',

@@ -21,7 +21,7 @@
           <div *ngFor="let user of users" class="container user-tile" style="height: 140px;width: 100px;float: left">
 
           <p style="color: black"><b>{{user.name}} {{user.surname}}</b><b class="time-left">{{user.modified_at}}</b></p>
-              <img src="../../../../assets/images/0.jpg" alt="Avatar">
+              <img src="assets/avatars/{{user.photo}}.svg" alt="Avatar">
 <!--              <img src="../../../../../../app/files/img/logo.png" alt="Avatar">-->
 
               <!--              <p style="color: #0e0e0e">{{post.content}}</p>-->
