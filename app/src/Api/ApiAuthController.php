@@ -116,8 +116,8 @@ class ApiAuthController implements ControllerProviderInterface
                 throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $vars['_username']));
             } else {
                 $response = [
-//                    'token' => $app['security.jwt.encoder']->encode(['name' => $user['email']]),
-                    'token' => $app['jwt_auth']->generateToken($user['id'])
+                    'token' => $app['security.jwt.encoder']->encode(['name' => $user['email']]),
+//                    'token' => $app['jwt_auth']->generateToken($user['id'])
                 ];
             }
         } catch (UsernameNotFoundException $e) {

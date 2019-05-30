@@ -33,7 +33,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Service\userTokenService;
 use Repository\UserRepository;
 
-use Ofat\SilexJWT\JWTAuth;
+//use Ofat\SilexJWT\JWTAuth;
 
 
 $app = new Application();
@@ -137,9 +137,23 @@ $app->register(new ValidatorServiceProvider());
 
 $app->register(new SessionServiceProvider());
 
-$app->register(new JWTAuth(),[
-    'jwt.secret' => 'test'
-]);
+//$app->register(new JWTAuth(),[
+//    'jwt.secret' => 'test'
+//]);
+
+
+$app['security.jwt'] = [
+    'secret_key' => 'Very_secret_key',
+    'life_time'  => 86400,
+    'options'    => [
+        'username_claim' => 'name', // default name, option specifying claim containing username
+        'header_name' => 'X-Access-Token', // default null, option for usage normal oauth2 header
+        'token_prefix' => 'Bearer',
+    ]
+];
+$app->register(new Silex\Provider\SecurityServiceProvider());
+$app->register(new Silex\Provider\SecurityJWTServiceProvider());
+
 
 $app->register(
     new SecurityServiceProvider(),
