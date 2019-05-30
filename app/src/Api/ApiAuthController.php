@@ -57,9 +57,10 @@ class ApiAuthController implements ControllerProviderInterface
         $controller->post('/login', [$this, 'loginAction']);
 
 //        $controller->post('/login/authenticate', [$this, 'checkCredentials']);
-        $controller->get('/logout', [$this, 'logoutAction']);
-        $controller->get('/signup', [$this, 'signupAction'])
-            ->method('POST|GET');
+        $controller->get('/logout', [$this, 'logoutAction'])
+            ->bind('auth_logout');
+
+        $controller->post('/signup', [$this, 'signupAction']);
 
         return $controller;
     }
@@ -186,32 +187,44 @@ class ApiAuthController implements ControllerProviderInterface
      */
     public function signupAction(Application $app, Request $request)
     {
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+
+        $password = $request->request->get('password');
+
         $user = [];
 
-        $form = $app['form.factory']->createBuilder(
-            SignupType::class,
-            $user
-        )->getForm();
-        $form->handleRequest($request);
+//        $form = $app['form.factory']->createBuilder(
+//            SignupType::class,
+//            $user
+//        )->getForm();
+//        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+//        if ($form->isSubmitted() && $form->isValid()) {
             $userRepository = new UserRepository($app['db']);
 
-            $user = $form->getData();
-            $password = $user['password'];
+            $user['name'] = $request->request->get('name');
+            $user['surname'] = $request->request->get('surname');
+            $user['email'] = $request->request->get('email');
+            $user['description'] = $request->request->get('description');
+            $user['birthDate'] = $request->request->get('birthDate');
+var_dump($user);
+//            $password = $user['password'];
             $user['password'] = $app['security.encoder.bcrypt']
                 ->encodePassword($password, '');
             $user['role_id'] = 2;
-            $user['photo'] = 'default.jpg';
+            $user['photo'] = $request->request->get('imageId');;
             $userRepository->save($user);
 
-            $app['session']->getFlashBag()->add(
-                'messages',
-                [
-                    'type' => 'success',
-                    'message' => 'message.signup_success',
-                ]
-            );
+//            $app['session']->getFlashBag()->add(
+//                'messages',
+//                [
+//                    'type' => 'success',
+//                    'message' => 'message.signup_success',
+//                ]
+//            );
 //            $response = new JsonResponse(array('result' => true));
 
 //            return $app->redirect(
@@ -219,7 +232,7 @@ class ApiAuthController implements ControllerProviderInterface
 //                ->generate('posts_index_paginated'),
 //                301
 //            );
-        }
+//        }
 //        else{
 //            $response = new JsonResponse(array('result' => false));
 //        }
@@ -230,7 +243,7 @@ class ApiAuthController implements ControllerProviderInterface
 //            'user/add.html.twig',
 //            array('form' => $form->createView())
 //        );
-        http_response_code(200);
+        return http_response_code(200);
     }
 
     /**
@@ -243,7 +256,7 @@ class ApiAuthController implements ControllerProviderInterface
     public function logoutAction(Application $app)
     {
         $app['session']->clear();
-        http_response_code(200);
+        return http_response_code(200);
 //        return $app['twig']->render('auth/logout.html.twig', []);
     }
 }

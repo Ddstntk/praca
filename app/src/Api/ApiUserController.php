@@ -57,6 +57,9 @@ class ApiUserController implements ControllerProviderInterface
         $controller->get('/id', [$this, 'idAction']);
         $controller->get('/profile', [$this, 'profileAction']);
         $controller->get('/view/{id}', [$this, 'viewAction']);
+        $controller->get('/config', [$this, 'dashboardAction']);
+        $controller->match('/config/set', [$this, 'dashboardSetAction'])
+        ->method('GET|POST');
         $controller->match('/index', [$this, 'indexAction'])
         ->method('GET|POST');
         $controller->match('/edit', [$this, 'editAction'])
@@ -157,6 +160,51 @@ class ApiUserController implements ControllerProviderInterface
 //            'user/view.html.twig',
 //            ['user' => $userRepository->getUserById($id)]
 //        );
+    }
+
+    /**
+     * Dashboard action
+     *
+     * @param Application $app Application
+     *
+     * @return mixed
+     */
+    public function dashboardAction(Application $app)
+    {
+        $userRepository = new UserRepository($app['db']);
+        $userId = $app['security.token_storage']->getToken()->getUser()->getID();
+
+        $response = new JsonResponse(array('userDashboard' => $userRepository->getDashboardConfig($userId)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
+     * Dashboard set action
+     *
+     * @param Application $app  Application
+     * @param int         $page Page
+     *
+     * @return mixed
+     */
+    public function dashboardSetAction(Application $app, Request $request)
+    {
+        $userRepository = new UserRepository($app['db']);
+
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
+        $userId = $app['security.token_storage']->getToken()->getUser()->getID();
+
+        $body = $request->request->get('body');
+        $data = json_encode($body);
+
+
+        $userRepository->setDashboardConfig($userId, $data);
+
+        $response = 1;
+        return $response;
     }
 
     /**

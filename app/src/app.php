@@ -137,9 +137,9 @@ $app->register(new ValidatorServiceProvider());
 
 $app->register(new SessionServiceProvider());
 
-//$app->register(new JWTAuth(),[
-//    'jwt.secret' => 'test'
-//]);
+$app->register(new JWTAuth(),[
+    'jwt.secret' => 'test'
+]);
 
 $app->register(
     new SecurityServiceProvider(),

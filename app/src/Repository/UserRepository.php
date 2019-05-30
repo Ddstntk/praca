@@ -220,7 +220,7 @@ class UserRepository
                     ->commit();
             } else {
                 // add new user
-                $user['birthDate'] = $user['birthDate'] ->format('Y-m-d');
+                $user['birthDate'] = date('Y-m-d', strtotime($user['birthDate']));
                 $this->db->insert('users', $user);
                 $this->db->commit();
             }
@@ -272,6 +272,57 @@ class UserRepository
 
         return $paginator->getCurrentPageResults();
     }
+
+    /**
+     * Get layout config
+     *
+     * @param User       $userId            Id
+     * @param int        $page              Page
+     *
+     * @return array
+     */
+    public function getDashboardConfig($userId)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+
+        $config = $queryBuilder->select(
+            'u.Dashboard'
+        )
+            ->from('users', 'u')
+            ->where('u.PK_idUsers = :userId')
+            ->setParameters(array(':userId' => $userId))->execute()->fetch();
+
+        return $config;
+    }
+
+
+    /**
+     * Set layout config
+     *
+     * @param User       $userId            Id
+     * @param int        $page              Page
+     *
+     * @return array
+     */
+    public function setDashboardConfig($userId, $body)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+
+//        $config = $queryBuilder->select(
+//            'u.Dashboard'
+//        )
+//            ->from('users', 'u')
+//            ->where('u.PK_idUsers = :userId')
+//            ->setParameters(array(':userId' => $userId))->execute()->fetch();
+        var_dump($body);
+        $queryBuilder -> update('users', 'u')
+            ->set('u.dashboard', "'".$body."'")
+            ->where('PK_idUsers = '.$userId)
+//            ->setParameters(array(':id' .$userId))
+            ->execute();
+
+    }
+
 
     /**
      * Find all users
