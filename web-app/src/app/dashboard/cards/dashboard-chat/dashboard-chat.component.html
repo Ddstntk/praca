@@ -1,34 +1,26 @@
 <mat-card style="margin: 15px;" class="mat-elevation-z15" fxFlex fxLayoutAlign="space-between" fxLayout="column">
-    <mat-card-header>
-        <div style="padding: 20px">
-            {{partner}}
-        </div>
-    </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="space-between" fxFlex>
     <div class="component-container" fxLayout="column" style="height: 100%; overflow-y: scroll; background-color: lightgray" fxFlex>
-          <div *ngFor="let message of messages" class="container" style="max-width: 400px; width: 100%; display: block;" [ngStyle]="styleObject(message)">
-            <img src="assets/avatars/1.svg" alt="Avatar">
+        <div style="color: black;" *ngIf="chats.length==0">Nie masz żadnych rozpoczętych chatów</div>
+        <div  *ngFor="let message of messages" class="container" style="max-width: 400px; width: 100%; display: block;" [ngStyle]="styleObject(message)" fxFlex="0 100 auto">
+            <img *ngIf="message.PK_idUsers!=userId" src="assets/avatars/{{message.photo}}.svg" alt="Avatar">
             <p style="color: #0e0e0e">{{message.content}}</p>
             <span class="time-right">{{message.PK_time}}</span>
           </div>
     </div>
-
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions fxFlex>
-        <div style="padding: 20px">
-            <textarea [(ngModel)]="messageBody"></textarea>
-            <select (change)="selectChat($event.target.value)" [(ngModel)]="chatSelected">
-                <option *ngFor="let chat of chats" [value]="chat[0].FK_idConversations" >{{chat[0].name}} {{chat[0].surname}}</option>
-            </select>
-            <button class="btn btn-primary" (click)="sendAction(messageBody);">SEND TEST</button>
-
-<!--            <button class="btn btn-default" (click)="Action(12);">NEW TEST</button>-->
-            {{chatSelected}}
-
+        <div fxLayout="row" style="padding: 20px">
+            <textarea fxFlex class="formField" [(ngModel)]="messageBody"></textarea>
+            <div fxLayout="column">
+                <h5>Wybierz chat:</h5>
+                <select class="formField" (change)="selectChat($event.target.value)" [(ngModel)]="chatSelected">
+                    <option *ngFor="let chat of chats" [value]="chat[0].FK_idConversations" >{{chat[0].name}} {{chat[0].surname}}</option>
+                </select>
+                <button class="btn btn-primary formField" (click)="sendAction(messageBody);">Wyślij</button>
+            </div>
         </div>
-<!--      <button mat-raised-button color="primary">button1</button>-->
-<!--      <button mat-raised-button color="primary">button2</button>-->
     </mat-card-actions>
   </mat-card-footer>
 </mat-card>

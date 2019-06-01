@@ -25,18 +25,31 @@ export class DashboardUsersComponent extends AbstractDashboardCard implements On
   users: any;
   pagesNumber: number;
   filter: any;
+  page: number;
+  prevActive: any;
+  nextActive: any;
 
   ngOnInit() {
     this.indexAction();
+    this.page=1;
     // this.friends = this.friendsService.indexAction();
     // alert(JSON.stringify(this.friends));
   }
 
   indexAction(filter = false) {
-    this.usersService.indexAction(filter).subscribe(data => {
+    this.usersService.indexAction(filter, this.page).subscribe(data => {
       this.users = data.usersIndexed.data;
-      console.log(this.users)
       this.pagesNumber = data.usersIndexed.pages_number
+      if(this.page==1){
+        this.prevActive = false;
+      } else {
+        this.prevActive = true;
+      }
+      if(this.page == this.pagesNumber) {
+        this.nextActive = false;
+      } else {
+        this.nextActive = true;
+      }
     });
   }
 
@@ -49,29 +62,10 @@ export class DashboardUsersComponent extends AbstractDashboardCard implements On
     this.usersService.inviteAction(id).subscribe(data => {
     });
   }
-  //
-  // profileAction() {
-  //   this.usersService.profileAction().subscribe(data => {
-  //
-  //   });
-  // }
-  //
-  // viewAction() {
-  //   this.usersService.viewAction(1234).subscribe(data => {
-  //
-  //   });
-  // }
-  //
-  // editAction() {
-  //   this.usersService.editAction({}).subscribe(data => {
-  //
-  //   });
-  // }
-  //
-  // passwordAction() {
-  //   this.usersService.passwordAction({password: "admin123"}).subscribe(data => {
-  //
-  //   });
-  // }
+
+  pageAction(value) {
+    this.page += value;
+    this.indexAction()
+  }
 
 }

@@ -3,35 +3,37 @@
       <div style="padding: 20px">
           <input placeholder="Filtruj" style="color: black" (change)="getFiltered()" [(ngModel)]="filter">
           <button class="btn btn-warning" (click)="getFiltered()">Filtruj</button>
-          {{pagesNumber}}
-<!--          <textarea [(ngModel)]="postBody"></textarea>-->
-          <!--            <select (change)="selectChat($event.target.value)">-->
-          <!--                <option *ngFor="let chat of chats" [value]="chat.FK_idConversations" >{{chat.name}} {{chat.surname}}</option>-->
-          <!--            </select>-->
-<!--          <button class="btn btn-primary" (click)="addAction(postBody);">SEND TEST</button>-->
-
-          <!--            <button class="btn btn-default" (click)="Action(12);">NEW TEST</button>-->
-
+          <button [disabled]="!prevActive" class="btn btn-primary" (click)="pageAction(-1)">Poprzednia strona</button>
+          <button [disabled]="!nextActive" class="btn btn-default" (click)="pageAction(+1)">Następna strona</button>
       </div>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="space-between" fxFlex>
       <div class="component-container" style="height: 100%; overflow-x: scroll; background-color: lightgray" fxFlex>
-
-<!--          <div *ngFor="let user of users| usersfilter: filter" class="container user-tile" style="height: 140px;width: 100px;float: left">-->
-          <div *ngFor="let user of users" class="container user-tile" style="height: 140px;width: 100px;float: left">
-
-          <p style="color: black"><b>{{user.name}} {{user.surname}}</b><b class="time-left">{{user.modified_at}}</b></p>
-              <img src="assets/avatars/{{user.photo}}.svg" alt="Avatar">
-<!--              <img src="../../../../../../app/files/img/logo.png" alt="Avatar">-->
-
-              <!--              <p style="color: #0e0e0e">{{post.content}}</p>-->
-                    <button *ngIf="!user.isFriend" class="btn btn-warning" (click)="inviteAction(user.PK_idUsers)">Zaproś</button>
-                    <button class="btn btn-default"><a [routerLink]="['/view/', user.PK_idUsers]">profile</a></button>
+          <div *ngIf="users.length==0">Nie ma użytkowników</div>
+          <div *ngFor="let user of users" class="container user-tile" style="height: 200px;width: 120px;float: left" fxLayout="column">
+              <div fxLayout="row">
+                  <button class="btn btn-default"><a [routerLink]="['/view/', user.PK_idUsers]" fxFlex><span class="oi oi-person" title="icon name" aria-hidden="true"></span></a></button>
+                  <button *ngIf="!user.isFriend" class="btn btn-warning" (click)="inviteAction(user.PK_idUsers)" fxFlex><span class="oi oi-plus" title="icon name" aria-hidden="true"></span></button>
+              </div>
+              <div fxLayout="column" style="text-align: center;">
+                  <img style="margin: 10px 0px 5px 20px;" src="assets/avatars/{{user.photo}}.svg" alt="Avatar">
+                  <p style="color: black"><b>{{user.name}} {{user.surname}}</b></p>
+              </div>
           </div>
 
+<!--          <div *ngFor="let user of users| usersfilter: filter" class="container user-tile" style="height: 140px;width: 100px;float: left">-->
+<!--          <div *ngFor="let user of users" class="container user-tile" style="height: 140px;width: 100px;float: left">-->
+
+<!--          <p style="color: black"><b>{{user.name}} {{user.surname}}</b><b class="time-left">{{user.modified_at}}</b></p>-->
+<!--              <img src="assets/avatars/{{user.photo}}.svg" alt="Avatar">-->
+<!--&lt;!&ndash;              <img src="../../../../../../app/files/img/logo.png" alt="Avatar">&ndash;&gt;-->
+
+<!--              &lt;!&ndash;              <p style="color: #0e0e0e">{{post.content}}</p>&ndash;&gt;-->
+<!--                    <button *ngIf="!user.isFriend" class="btn btn-warning" (click)="inviteAction(user.PK_idUsers)">Zaproś</button>-->
+<!--                    <button class="btn btn-default"><a [routerLink]="['/view/', user.PK_idUsers]">profile</a></button>-->
+<!--          </div>-->
+
       </div>
-<!--      <button class="btn btn-primary" (click)="pageAction(-1)"></button>-->
-<!--      <button class="btn btn-default" (click)="pageAction(+1)"></button>-->
   </mat-card-content>
 
 </mat-card>

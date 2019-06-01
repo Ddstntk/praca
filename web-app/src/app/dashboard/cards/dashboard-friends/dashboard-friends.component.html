@@ -4,31 +4,25 @@
           <input placeholder="Filtruj" style="color: black" [(ngModel)]="filter">
           <button class="btn btn-warning" (click)="invitesAction()">Zaproszenia</button>
           <button class="btn btn-default" (click)="indexAction()">Znajomi</button>
-
-          <!--          <textarea [(ngModel)]="postBody"></textarea>-->
-          <!--            <select (change)="selectChat($event.target.value)">-->
-          <!--                <option *ngFor="let chat of chats" [value]="chat.FK_idConversations" >{{chat.name}} {{chat.surname}}</option>-->
-          <!--            </select>-->
-<!--          <button class="btn btn-primary" (click)="addAction(postBody);">SEND TEST</button>-->
-
-          <!--            <button class="btn btn-default" (click)="Action(12);">NEW TEST</button>-->
       </div>
   </mat-card-header>
   <mat-card-content fxLayout="column" fxLayoutAlign="space-between" fxFlex>
       <div class="component-container" style="height: 100%; overflow-x: scroll; background-color: lightgray" fxFlex>
+          <div style="color: black;" *ngIf="friends.length==0 && view!='invites'">Nie masz jeszcze żadnych znajomych</div>
+          <div style="color: black;" *ngIf="friends.length==0 && view=='invites'">Nie masz żadnych oczekujących zaproszeń</div>
 
-          <div *ngFor="let friend of friends | usersfilter: filter" class="container user-tile" style="height: 140px;width: 100px;float: left">
-              <p style="color: black"><b>{{friend.name}} {{friend.surname}} {{friend.PK_idUsers}}</b><b class="time-left">{{friend.modified_at}}</b></p>
-              <img src="assets/avatars/{{friend.photo}}.svg" alt="Avatar">
-<!--              <p style="color: #0e0e0e">{{post.content}}</p>-->
-                    <button class="btn btn-primary" (click)="messageAction(friend.PK_idUsers)">message</button>
-                    <button class="btn btn-default" [routerLink]="['/view/', friend.PK_idUsers]">profile</button>4
-                    <button *ngIf="view=='invites'" class="btn btn-warning" (click)="addFriendAction(friend.PK_idUsers)">akceptuj</button>
+          <div *ngFor="let friend of friends | usersfilter: filter" class="container user-tile" style="height: 200px;width: 120px;float: left" fxLayout="column">
+              <div fxLayout="row">
+                  <button style="display:inline-block" *ngIf="view!='invites'" class="btn btn-primary" (click)="messageAction(friend.PK_idUsers)" fxFlex><span class="oi oi-envelope-closed" title="icon name" aria-hidden="true"></span></button>
+                  <button style="display:inline-block" class="btn btn-default" [routerLink]="['/view/', friend.PK_idUsers]" fxFlex><span class="oi oi-person" title="icon name" aria-hidden="true"></span></button>
+                  <button style="display:inline-block" *ngIf="view=='invites'" class="btn btn-success" (click)="addFriendAction(friend.PK_idUsers)"><span class="oi oi-thumb-up" title="icon name" aria-hidden="true"></span></button>
+              </div>
+              <div fxLayout="column" style="text-align: center;">
+                  <img style="margin: 10px 0px 5px 20px;" src="assets/avatars/{{friend.photo}}.svg" alt="Avatar">
+                  <p style="color: black"><b>{{friend.name}} {{friend.surname}}</b></p>
+              </div>
           </div>
-
       </div>
-<!--      <button class="btn btn-primary" (click)="pageAction(-1)"></button>-->
-<!--      <button class="btn btn-default" (click)="pageAction(+1)"></button>-->
   </mat-card-content>
 
 </mat-card>

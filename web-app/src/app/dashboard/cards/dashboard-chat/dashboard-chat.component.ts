@@ -52,9 +52,9 @@ export class DashboardChatComponent extends AbstractDashboardCard implements OnI
 
   styleObject(message): Object {
     if( message.PK_idUsers === this.userId ) {
-      return {float: "right"}
+      return {}
     } else {
-      return {float: "left", background: "#337ab7"}
+      return {background: "#337ab7"}
     }
   }
 

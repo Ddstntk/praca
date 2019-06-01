@@ -368,7 +368,8 @@ class ChatRepository
             'm.content',
             'u.PK_idUsers',
             'u.name',
-            'u.surname'
+            'u.surname',
+            'u.photo'
         )
             ->from('messages', 'm')
             ->innerJoin(

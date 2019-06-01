@@ -1,9 +1,14 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "../node_modules/@angular/material/_theming.scss";
 @import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css";
-
+//@import "assets/icons/font/css/open-iconic-foundation.css";
 /* You can add global styles to this file, and also import other style files */
 /* Application-wide Styles */
+
+.mat-card{
+    padding: 15px;
+}
+
 h1 {
     color: #369;
     font-family: Arial, Helvetica, sans-serif;
@@ -30,7 +35,7 @@ body, input[type="text"], button {
 .component-container {
     /*height: 30%;*/
     /*width: 33%;*/
-    border: 2px solid green;
+    //border: 2px solid green;
     padding: 8px;
     display: inline-block;
 }
@@ -46,7 +51,9 @@ body, input[type="text"], button {
    }
 }
 
-
+.formField {
+    margin: 10px;
+}
 
 
 

@@ -16,8 +16,8 @@ export class UsersComponentService {
         return this.http.get('api/friend/add/' + friendId);
     }
 
-    indexAction(filter): Observable<any> {
-        return this.http.post('api/user/index', {filter:filter});
+    indexAction(filter, page): Observable<any> {
+        return this.http.post('api/user/index', {filter:filter, page:page});
     }
 
     indexInvitesAction(): Observable<any> {

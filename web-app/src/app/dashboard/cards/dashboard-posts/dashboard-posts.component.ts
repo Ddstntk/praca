@@ -26,7 +26,9 @@ export class DashboardPostsComponent extends AbstractDashboardCard implements On
   chatSelected: number;
   posts: any;
   page: number;
-
+  pageNumber: number;
+  prevActive: any;
+  nextActive: any;
   ngOnInit() {
     this.page = 1;
     // this.friends = this.friendsService.indexAction();
@@ -42,6 +44,17 @@ export class DashboardPostsComponent extends AbstractDashboardCard implements On
   indexAction() {
     this.postsService.indexAction(this.page).subscribe(data => {
       this.posts=data.postsIndexed.data;
+      this.pageNumber = data.postsIndexed.pages_number;
+      if(this.page==1){
+        this.prevActive = false;
+      } else {
+        this.prevActive = true;
+      }
+      if(this.page == this.pageNumber) {
+        this.nextActive = false;
+      } else {
+        this.nextActive = true;
+      }
     });
   }
 

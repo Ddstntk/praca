@@ -107,7 +107,8 @@ class ApiUserController implements ControllerProviderInterface
         $userRepository = new UserRepository($app['db']);
         $friendsRepository = new FriendsRepository($app['db']);
         $userId = $app['security.token_storage']->getToken()->getUser()->getID();
-
+        $page = $request->request->get('page');
+        ;
         $usersPaginated = $userRepository->findAllPaginated($friendsRepository, $userId, $page);
 //        var_dump($usersPaginated);
         $result = [];

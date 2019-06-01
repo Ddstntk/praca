@@ -27,6 +27,11 @@ export class ConfigComponent implements OnInit {
   friendsCheck: any;
 
   config: any;
+
+  colorMap = [
+                [],
+                []
+            ]
   constructor(private configService: ConfigComponentService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -84,7 +89,42 @@ export class ConfigComponent implements OnInit {
     })
 
   }
+  changeColors(){
 
+      // if(this.colorMap[0].length + this.chatWth < 4){
+      //     for(let i = 0; i < this.chatWth; i++){
+      //         this.colorMap[0].push("chat")
+      //     }
+      //     if (this.chatHgt > 1){
+      //         for(let k = 0; k < this.chatHgt; k++){
+      //             this.colorMap[1].push("chat")
+      //         }
+      //     }
+      // } else {
+      //     for(let i = 0; i < this.chatWth; i++){
+      //         this.colorMap[1].push("chat")
+      //     }
+      // }
+      // if(this.chatWth > 1 && this.postsWth > 1){
+      //     this.colorMap[1].push("none")
+      // }
+      // if(this.colorMap[0].length + this.postsWth < 4){
+      //     for(let i = 0; i < this.postsWth; i++){
+      //         this.colorMap[0].push("posts")
+      //     }
+      //     if (this.postsHgt > 1){
+      //         for(let k = 0; k < this.postsHgt; k++){
+      //             this.colorMap[1].push("posts")
+      //         }
+      //     }
+      // } else {
+      //     for(let i = 0; i < this.chatWth; i++){
+      //         this.colorMap[1].push("posts")
+      //     }
+      // }
+
+      console.log(this.colorMap)
+  }
   checkSize(){
 
       if(this.chatHgt + this.friendsHgt > 2){
@@ -123,6 +163,7 @@ export class ConfigComponent implements OnInit {
           this.friendsWth = 0;
           this.friendsHgt = 0;
       }
+      this.changeColors();
   }
 
 }

@@ -21,7 +21,7 @@
     </nav>
 
     <div id="content" style="width: 100%">
-        <div style="width: 100%; height: 100%; border: 2px solid red">
+        <div style="width: 100%; height: 100">
 
 
 
@@ -33,104 +33,112 @@
             <mat-grid-tile
                     [colspan]="18"
                     [rowspan]="11">
-                <mat-card style="margin: 15px;" class="mat-elevation-z15" fxFlex fxLayoutAlign="space-between" fxLayout="column">
+                <mat-card style="margin: 15px;" class="mat-elevation-z15" fxLayoutAlign="space-between" fxLayout="column" fxFlex>
                 <mat-card-header>
                     <p>Konfiguracja</p>
                 </mat-card-header>
                 <mat-card-content fxLayoutAlign="space-between">
                     <div fxLayout="column">
-                        {{chatCheck}} {{postsCheck}} {{usersCheck}} {{friendsCheck}}
-                        Ukryj chat:
-                        <input type="checkbox" [(ngModel)]="chatCheck" [checked]="chatCheck == 'true'" (change)="checkSize()">
-                        Szerokość chatu: {{chatWth}}
-                        <select [(ngModel)]="chatWth" (change)="checkSize()">
-                            <option [ngValue]="0" >0</option>
-                            <option [ngValue]="1" >1</option>
-                            <option [ngValue]="2" >2</option>
-                            <option [ngValue]="3" >3</option>
-                            <option [ngValue]="4" >4</option>
-                        </select>
-                        Ukryj chatu
-                        <select [(ngModel)]="chatHgt" [(ngModel)]="chatCheck" (change)="checkSize()">
-                            <option [ngValue]="0" >0</option>
-                            <option [ngValue]="1" >1</option>
-                            <option [ngValue]="2" >2</option>
-                        </select>
-                        Pokaż posty:
-                        <input type="checkbox" [(ngModel)]="postsCheck" [checked]="postsCheck == 'true'" (change)="checkSize()">
-                        Szerokość postów
-                        <select [(ngModel)]="postsWth" (change)="checkSize()">
-                            <option [ngValue]="0" >0</option>
-                            <option [ngValue]="1" >1</option>
-                            <option [ngValue]="2" >2</option>
-                            <option [ngValue]="3" >3</option>
-                            <option [ngValue]="4" >4</option>
-                        </select>
-                        Wysokość postów
-                        <select [(ngModel)]="postsHgt" (change)="checkSize()">
-                            <option [ngValue]="0" >0</option>
-                            <option [ngValue]="1" >1</option>
-                            <option [ngValue]="2" >2</option>
-                        </select>
-                        Ukryj użytkowników:
-                        <input type="checkbox" [(ngModel)]="usersCheck" [checked]="usersCheck == 'true'" (change)="checkSize()">
-                        Szerokość użytkowników
-                        <select [(ngModel)]="usersWth" (change)="checkSize()">
-                            <option [ngValue]="0" >0</option>
-                            <option [ngValue]="1" >1</option>
-                            <option [ngValue]="2" >2</option>
-                            <option [ngValue]="3" >3</option>
-                            <option [ngValue]="4" >4</option>
+                        <div class="formField" fxLayout="row">
+                            <div class="formField" fxLayout="column">
+                                Ukryj chat:
+                                <input type="checkbox" [(ngModel)]="chatCheck" [checked]="chatCheck == 'true'" (change)="checkSize()">
+                                Szerokość chatu:
+                                <select [(ngModel)]="chatWth" (change)="checkSize()">
+                                    <option [ngValue]="0" >0</option>
+                                    <option [ngValue]="1" >1</option>
+                                    <option [ngValue]="2" >2</option>
+                                    <option [ngValue]="3" >3</option>
+                                    <option [ngValue]="4" >4</option>
+                                </select>
+                                Wysokość chatu
+                                <select [(ngModel)]="chatHgt" [(ngModel)]="chatCheck" (change)="checkSize()">
+                                    <option [ngValue]="0" >0</option>
+                                    <option [ngValue]="1" >1</option>
+                                    <option [ngValue]="2" >2</option>
+                                </select>
+                            </div>
+                            <div class="formField" fxLayout="column">
+                                Pokaż posty:
+                                <input type="checkbox" [(ngModel)]="postsCheck" [checked]="postsCheck == 'true'" (change)="checkSize()">
+                                Szerokość postów
+                                <select [(ngModel)]="postsWth" (change)="checkSize()">
+                                    <option [ngValue]="0" >0</option>
+                                    <option [ngValue]="1" >1</option>
+                                    <option [ngValue]="2" >2</option>
+                                    <option [ngValue]="3" >3</option>
+                                    <option [ngValue]="4" >4</option>
+                                </select>
+                                Wysokość postów
+                                <select [(ngModel)]="postsHgt" (change)="checkSize()">
+                                    <option [ngValue]="0" >0</option>
+                                    <option [ngValue]="1" >1</option>
+                                    <option [ngValue]="2" >2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="formField" fxLayout="row">
+                            <div class="formField" fxLayout="column">
+                                Ukryj znajomych:
+                                <input type="checkbox" [(ngModel)]="friendsCheck" [checked]="friendsCheck == 'true'" (change)="checkSize()">
+                                Szerokość znajomych
+                                <select [(ngModel)]="friendsWth" (change)="checkSize()">
+                                    <option [ngValue]="0" >0</option>
+                                    <option [ngValue]="1" >1</option>
+                                    <option [ngValue]="2" >2</option>
+                                    <option [ngValue]="3" >3</option>
+                                    <option [ngValue]="4" >4</option>
 
-                        </select>
-                        Wysokość użytkowników
-                        <select [(ngModel)]="usersHgt" (change)="checkSize()">
-                            <option [ngValue]="0" >0</option>
-                            <option [ngValue]="1" >1</option>
-                            <option [ngValue]="2" >2</option>
-                        </select>
-                        Ukryj znajomych:
-                        <input type="checkbox" [(ngModel)]="friendsCheck" [checked]="friendsCheck == 'true'" (change)="checkSize()">
-                        Szerokość znajomych
-                        <select [(ngModel)]="friendsWth" (change)="checkSize()">
-                            <option [ngValue]="0" >0</option>
-                            <option [ngValue]="1" >1</option>
-                            <option [ngValue]="2" >2</option>
-                            <option [ngValue]="3" >3</option>
-                            <option [ngValue]="4" >4</option>
+                                </select>
+                                Wysokość znajomych
+                                <select [(ngModel)]="friendsHgt" (change)="checkSize()">
+                                    <option [ngValue]="0" >0</option>
+                                    <option [ngValue]="1" >1</option>
+                                    <option [ngValue]="2" >2</option>
+                                </select>
+                            </div>
+                            <div class="formField" fxLayout="column">
+                                Ukryj użytkowników:
+                                <input type="checkbox" [(ngModel)]="usersCheck" [checked]="usersCheck == 'true'" (change)="checkSize()">
+                                Szerokość użytkowników
+                                <select [(ngModel)]="usersWth" (change)="checkSize()">
+                                    <option [ngValue]="0" >0</option>
+                                    <option [ngValue]="1" >1</option>
+                                    <option [ngValue]="2" >2</option>
+                                    <option [ngValue]="3" >3</option>
+                                    <option [ngValue]="4" >4</option>
 
-                        </select>
-                        Wysokość znajomych
-                        <select [(ngModel)]="friendsHgt" (change)="checkSize()">
-                            <option [ngValue]="0" >0</option>
-                            <option [ngValue]="1" >1</option>
-                            <option [ngValue]="2" >2</option>
-                        </select>
-                        <button [routerLink]="['/dashboard']" (click)="applyChanges()" class="btn btn-primary">Zmień</button>
+                                </select>
+                                Wysokość użytkowników
+                                <select [(ngModel)]="usersHgt" (change)="checkSize()">
+                                    <option [ngValue]="0" >0</option>
+                                    <option [ngValue]="1" >1</option>
+                                    <option [ngValue]="2" >2</option>
+                                </select>
+                            </div>
 
+                        </div>
                     </div>
-<!--                    <div fxLayout="column">-->
-<!--                        <div fxLayout="row">-->
-<!--                            <div style="background: red" fxLayout="column">chat</div>-->
-<!--                            <div style="background: blue" fxLayout="column">posts</div>-->
+
+                    <!--                    <div style="border: 1px solid red; margin: 20px" fxLayout="column" fxFlex>-->
+<!--                        <div  fxLayout="row" fxFlex>-->
+<!--                            <div id="config00" style="border: 1px solid red;" fxFlex></div>-->
+<!--                            <div id="config01" style="border: 1px solid red;" fxFlex></div>-->
+<!--                            <div id="config02" style="border: 1px solid red;" fxFlex></div>-->
+<!--                            <div id="config03" style="border: 1px solid red;" fxFlex></div>-->
 <!--                        </div>-->
-<!--                        <div fxLayout="row">-->
-<!--                            <div style="background: green" fxLayout="column">friends</div>-->
-<!--                            <div style="background: blueviolet" fxLayout="column">users</div>-->
+<!--                        <div  fxLayout="row" fxFlex>-->
+<!--                            <div id="config10" style="border: 1px solid red;" fxFlex></div>-->
+<!--                            <div id="config11" style="border: 1px solid red;; " fxFlex></div>-->
+<!--                            <div id="config12" style="border: 1px solid red;; " fxFlex></div>-->
+<!--                            <div id="config13" style="border: 1px solid red;; " fxFlex></div>-->
 <!--                        </div>-->
 <!--                    </div>-->
-                </mat-card-content>
-<!--                <div>-->
-<!--                    <div fxLayout="row">-->
-<!--                        <div style="background: red" fxLayout="column">chat</div>-->
-<!--                        <div style="background: blue" fxLayout="column">posts</div>-->
-<!--                    </div>-->
-<!--                    <div fxLayout="row">-->
-<!--                        <div style="background: green" fxLayout="column">friends</div>-->
-<!--                        <div style="background: blueviolet" fxLayout="column">users</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-            </mat-card>
+
+       </mat-card-content>
+                    <button style="max-width: 100px;" [routerLink]="['/dashboard']" (click)="applyChanges()" class="btn btn-primary">Zmień</button>
+
+                </mat-card>
 
 
             </mat-grid-tile>
