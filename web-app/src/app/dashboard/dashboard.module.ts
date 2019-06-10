@@ -7,7 +7,13 @@ import {DashboardChatComponent} from './cards/dashboard-chat/dashboard-chat.comp
 import {DashboardPostsComponent} from "./cards/dashboard-posts/dashboard-posts.component";
 import {DashboardCardsSpawnerComponent} from './cards/dashboard-cards-spawner/dashboard-cards-spawner.component';
 import {
-  MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatListModule, MatSidenavModule,
+  MatButtonModule,
+  MatCardModule,
+  MatGridListModule,
+  MatIconModule,
+  MatListModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
   MatTooltipModule
 } from '@angular/material';
 
@@ -34,7 +40,9 @@ import {UsersFilterPipe} from "../_pipes/users.pipe";
     MatSidenavModule,
     FlexLayoutModule,
     DashboardRoutingModule,
-      FormsModule
+      FormsModule,
+    MatProgressSpinnerModule
+
   ],
   declarations: [
       DashboardComponent,

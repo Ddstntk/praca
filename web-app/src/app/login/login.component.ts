@@ -34,13 +34,19 @@ export class LoginComponent implements OnInit {
 
         formData.append("login_type[email]", this.model.username);
         formData.append("login_type[password]",this.model.password);
-        this.authenticationService.serverLogin(formData).subscribe(
+        this.authenticationService.login(this.model.username, this.model.password)
+            .first()
+            .subscribe(
+        // this.authenticationService.serverLogin(formData).subscribe(
             data => {
-                this.authenticationService.login(this.model.username, this.model.password)
-                    .first()
-                    .subscribe(
-                        data => {
-                            this.router.navigate([this.returnUrl]);
+                // this.authenticationService.login(this.model.username, this.model.password)
+                //     .first()
+                //
+                this.authenticationService.serverLogin(formData).subscribe(
+
+                    data => {
+                        // console.log(this.returnUrl)
+                            this.router.navigate(['/dashboard']);
                         },
                         error => {
                             this.error = error;

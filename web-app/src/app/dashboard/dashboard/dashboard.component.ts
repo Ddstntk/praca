@@ -28,14 +28,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     cols_vvbig: Observable<number>;
 
   windowSize: {width: any, height: any}
-  
+  loading: boolean;
   chatSize: any;
   friendsSize: any;
   usersSize: any;
   postsSize: any;
 
   config: any;
-
+  order = [];
   constructor(private cardsService: DashboardCardsService,
               private observableMedia: ObservableMedia,
               private usersService: UsersComponentService) {
@@ -45,6 +45,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+      this.loading = true;
+      setTimeout(() => { this.loading = false }, 2000);
+
       // this.cardsService.destroyCards();
 
       // this.usersService.getConfigAction().subscribe(data => {
@@ -168,6 +171,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           var jsonData = data.userDashboard.Dashboard.replace('/\"','/')
           this.config = JSON.parse(jsonData);
           console.log(JSON.stringify(this.config))
+          this.order = this.config.components;
           this.chatSize = this.config.chat;
           this.postsSize = this.config.posts;
           this.usersSize = this.config.users;
@@ -176,11 +180,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
           // this.setSize(this.config.posts.hgt, this.config.posts.wdt, "post");
           // this.setSize(this.config.users.hgt, this.config.users.wdt, "users");
           // this.setSize(this.config.friends.hgt, this.config.friends.wdt, "friends");
-          console.log(this.chatSize)
-          console.log(this.postsSize)
-          console.log(this.usersSize)
-          console.log(this.friendsSize)
-          this.createCards();
+          // console.log(this.chatSize)
+          // console.log(this.postsSize)
+          // console.log(this.usersSize)
+          // console.log(this.friendsSize)
+          this.createCards(this.loadingOff);
       });
     // this.createCards();
   }
@@ -189,6 +193,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.cardsService.destroyCards();
   }
 
+  loadingOff(){
+      this.loading=false;
+  }
   setSize(height, width, variable) {
       var hgt;
       var wdt;
@@ -241,9 +248,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
       
   }
-  
-  createCards(): void {
+
+  spawnChat(): void {
       if(this.chatSize.wdt > 0 && this.chatSize.hgt > 0) {
+
           this.cardsService.addCard(
               new DashboardCard(
                   {
@@ -276,8 +284,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
               )
           );
       }
-      if(this.postsSize.wdt > 0 && this.postsSize.hgt > 0) {
+  }
 
+  spawnPosts(): void {
+      if(this.postsSize.wdt > 0 && this.postsSize.hgt > 0) {
           this.cardsService.addCard(
               new DashboardCard(
                   {
@@ -310,7 +320,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
               )
           );
       }
+  }
+
+  spawnFriends(): void {
       if(this.friendsSize.wdt > 0 && this.friendsSize.hgt > 0) {
+
           this.cardsService.addCard(
               new DashboardCard(
                   {
@@ -343,7 +357,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
               )
           );
       }
+  }
+
+  spawnUsers(): void {
       if(this.usersSize.wdt > 0 && this.usersSize.hgt > 0) {
+
           this.cardsService.addCard(
               new DashboardCard(
                   {
@@ -376,7 +394,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
               )
           );
       }
-
   }
+  createCards(callback): void {
+    this.loading = true;
+      this.order.forEach((element) => {
+          if(element == "chat"){
+              this.spawnChat();
+          } else if (element == "posty"){
+              this.spawnPosts();
+          } else if (element == "znajomi"){
+              this.spawnFriends();
+          } else if (element == "uzytkownicy"){
+              this.spawnUsers();
+          }
+      })
+  }
+
 
 }

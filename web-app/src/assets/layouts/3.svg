@@ -1,0 +1,16 @@
+<svg width="64" height="32" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="34" width="66" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_41" y2="16.576922" x2="65.037779" y1="16.576922" x1="32.209236" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_43" y2="36.20675" x2="32.128208" y1="-0.217951" x1="32.128208" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
+  <text transform="matrix(0.338195, 0, 0, 0.269843, 8.70529, 6.46335)" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_45" y="43.58276" x="14.670195" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">1</text>
+  <text style="cursor: move;" transform="matrix(0.338195, 0, 0, 0.269843, 8.70529, 6.46335)" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_46" y="13.175684" x="110.958147" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">2</text>
+  <text style="cursor: text;" transform="matrix(0.338195, 0, 0, 0.269843, 8.70529, 6.46335)" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_48" y="73.039553" x="111.337236" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">3</text>
+ </g>
+</svg>

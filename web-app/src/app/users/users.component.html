@@ -27,6 +27,9 @@
         <mat-sidenav-container style="min-height: 100%;" fxFlex>
 
   <mat-sidenav-content style="min-height: 100%;">
+      <div style="margin-left: 45vw; margin-top: 45vh" *ngIf="loading" fxFlexAlign="center">
+          <mat-spinner></mat-spinner>
+      </div>
     <mat-grid-list [cols]="18">
       <mat-grid-tile
                      [colspan]="18"

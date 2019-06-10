@@ -25,7 +25,6 @@
 
 
 
-
         <mat-sidenav-container style="min-height: 100%;" fxFlex>
 
     <mat-sidenav-content style="min-height: 100%;">
@@ -40,82 +39,79 @@
                 <mat-card-content fxLayoutAlign="space-between">
                     <div fxLayout="column">
                         <div class="formField" fxLayout="row">
-                            <div class="formField" fxLayout="column">
-                                Ukryj chat:
-                                <input type="checkbox" [(ngModel)]="chatCheck" [checked]="chatCheck == 'true'" (change)="checkSize()">
-                                Szerokość chatu:
-                                <select [(ngModel)]="chatWth" (change)="checkSize()">
-                                    <option [ngValue]="0" >0</option>
-                                    <option [ngValue]="1" >1</option>
-                                    <option [ngValue]="2" >2</option>
-                                    <option [ngValue]="3" >3</option>
-                                    <option [ngValue]="4" >4</option>
-                                </select>
-                                Wysokość chatu
-                                <select [(ngModel)]="chatHgt" [(ngModel)]="chatCheck" (change)="checkSize()">
-                                    <option [ngValue]="0" >0</option>
-                                    <option [ngValue]="1" >1</option>
-                                    <option [ngValue]="2" >2</option>
-                                </select>
-                            </div>
-                            <div class="formField" fxLayout="column">
-                                Pokaż posty:
-                                <input type="checkbox" [(ngModel)]="postsCheck" [checked]="postsCheck == 'true'" (change)="checkSize()">
-                                Szerokość postów
-                                <select [(ngModel)]="postsWth" (change)="checkSize()">
-                                    <option [ngValue]="0" >0</option>
-                                    <option [ngValue]="1" >1</option>
-                                    <option [ngValue]="2" >2</option>
-                                    <option [ngValue]="3" >3</option>
-                                    <option [ngValue]="4" >4</option>
-                                </select>
-                                Wysokość postów
-                                <select [(ngModel)]="postsHgt" (change)="checkSize()">
-                                    <option [ngValue]="0" >0</option>
-                                    <option [ngValue]="1" >1</option>
-                                    <option [ngValue]="2" >2</option>
-                                </select>
-                            </div>
+                            <label (click)="changeLayout(1)">
+                                <div style="margin-bottom: 40px" >
+                                    <input name="cb" id="cb"type="radio">
+                                    <img mat-card-sm-image src="assets/layouts/1.svg">
+                                </div>
+                            </label>
+                            <label (click)="changeLayout(2)">
+                                <div style="margin-bottom: 40px" >
+                                    <input name="cb" id="cb2"type="radio">
+                                    <img mat-card-sm-image src="assets/layouts/2.svg">
+                                </div>
+                            </label>
+                            <label (click)="changeLayout(3)">
+                                <div style="margin-bottom: 40px" >
+                                    <input name="cb" id="cb3"type="radio">
+                                    <img mat-card-sm-image src="assets/layouts/3.svg">
+                                </div>
+                            </label>
+                            <label (click)="changeLayout(4)">
+                                <div style="margin-bottom: 40px" >
+                                    <input name="cb" id="cb4"type="radio">
+                                    <img mat-card-sm-image src="assets/layouts/4.svg">
+                                </div>
+                            </label>
                         </div>
+                        <span *ngIf="componentChoice.length > 0">Dobierz moduły:</span>
                         <div class="formField" fxLayout="row">
-                            <div class="formField" fxLayout="column">
-                                Ukryj znajomych:
-                                <input type="checkbox" [(ngModel)]="friendsCheck" [checked]="friendsCheck == 'true'" (change)="checkSize()">
-                                Szerokość znajomych
-                                <select [(ngModel)]="friendsWth" (change)="checkSize()">
-                                    <option [ngValue]="0" >0</option>
-                                    <option [ngValue]="1" >1</option>
-                                    <option [ngValue]="2" >2</option>
-                                    <option [ngValue]="3" >3</option>
-                                    <option [ngValue]="4" >4</option>
-
-                                </select>
-                                Wysokość znajomych
-                                <select [(ngModel)]="friendsHgt" (change)="checkSize()">
-                                    <option [ngValue]="0" >0</option>
-                                    <option [ngValue]="1" >1</option>
-                                    <option [ngValue]="2" >2</option>
+                            <label *ngFor="let component of componentChoice">
+                                {{component}}:
+                            <div style="margin-bottom: 40px" >
+                                <select required>
+                                    <option *ngFor="let option of options" (click)="assignModule(component, option)">{{option}}</option>
                                 </select>
                             </div>
-                            <div class="formField" fxLayout="column">
-                                Ukryj użytkowników:
-                                <input type="checkbox" [(ngModel)]="usersCheck" [checked]="usersCheck == 'true'" (change)="checkSize()">
-                                Szerokość użytkowników
-                                <select [(ngModel)]="usersWth" (change)="checkSize()">
-                                    <option [ngValue]="0" >0</option>
-                                    <option [ngValue]="1" >1</option>
-                                    <option [ngValue]="2" >2</option>
-                                    <option [ngValue]="3" >3</option>
-                                    <option [ngValue]="4" >4</option>
+                            </label>
+<!--                            <div class="formField" fxLayout="column">-->
+<!--                                Ukryj znajomych:-->
+<!--                                <input type="checkbox" [(ngModel)]="friendsCheck" [checked]="friendsCheck == 'true'" (change)="checkSize()">-->
+<!--                                Szerokość znajomych-->
+<!--                                <select [(ngModel)]="friendsWth" (change)="checkSize()">-->
+<!--                                    <option [ngValue]="0" >0</option>-->
+<!--                                    <option [ngValue]="1" >1</option>-->
+<!--                                    <option [ngValue]="2" >2</option>-->
+<!--                                    <option [ngValue]="3" >3</option>-->
+<!--                                    <option [ngValue]="4" >4</option>-->
 
-                                </select>
-                                Wysokość użytkowników
-                                <select [(ngModel)]="usersHgt" (change)="checkSize()">
-                                    <option [ngValue]="0" >0</option>
-                                    <option [ngValue]="1" >1</option>
-                                    <option [ngValue]="2" >2</option>
-                                </select>
-                            </div>
+<!--                                </select>-->
+<!--                                Wysokość znajomych-->
+<!--                                <select [(ngModel)]="friendsHgt" (change)="checkSize()">-->
+<!--                                    <option [ngValue]="0" >0</option>-->
+<!--                                    <option [ngValue]="1" >1</option>-->
+<!--                                    <option [ngValue]="2" >2</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="formField" fxLayout="column">-->
+<!--                                Ukryj użytkowników:-->
+<!--                                <input type="checkbox" [(ngModel)]="usersCheck" [checked]="usersCheck == 'true'" (change)="checkSize()">-->
+<!--                                Szerokość użytkowników-->
+<!--                                <select [(ngModel)]="usersWth" (change)="checkSize()">-->
+<!--                                    <option [ngValue]="0" >0</option>-->
+<!--                                    <option [ngValue]="1" >1</option>-->
+<!--                                    <option [ngValue]="2" >2</option>-->
+<!--                                    <option [ngValue]="3" >3</option>-->
+<!--                                    <option [ngValue]="4" >4</option>-->
+
+<!--                                </select>-->
+<!--                                Wysokość użytkowników-->
+<!--                                <select [(ngModel)]="usersHgt" (change)="checkSize()">-->
+<!--                                    <option [ngValue]="0" >0</option>-->
+<!--                                    <option [ngValue]="1" >1</option>-->
+<!--                                    <option [ngValue]="2" >2</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
 
                         </div>
                     </div>
@@ -136,7 +132,7 @@
 <!--                    </div>-->
 
        </mat-card-content>
-                    <button style="max-width: 100px;" [routerLink]="['/dashboard']" (click)="applyChanges()" class="btn btn-primary">Zmień</button>
+                    <button style="max-width: 100px;" [routerLink]="['/dashboard']" (click)="applyChanges()" class="btn btn-primary" type="submit">Zmień</button>
 
                 </mat-card>
 

@@ -50,6 +50,8 @@ import {RegisterComponent} from "./register/register.component";
 import {RegisterComponentService} from "./register/register.component.service";
 
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
@@ -92,6 +94,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatToolbarModule,
     BrowserModule,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule
       // routing
   ],
   providers: [

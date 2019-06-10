@@ -13,10 +13,12 @@ export class UsersComponent implements OnInit {
   user: any;
   userId: any;
   buttons = false;
-
+  loading: boolean;
   constructor(private userService: UsersComponentService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loading = true;
+    setTimeout(() => { this.loading = false }, 1000);
     this.userId = this.route.snapshot.paramMap.get('id');
     this.getProfileAction();
     // this.friends = this.friendsService.indexAction();
