@@ -29,7 +29,7 @@
         "symfony/config": "2.8",
         "symfony/twig-bundle": "2.8",
         "symfony/http-kernel": "2.8",
-        "symfony/phpunit-bridge": "2.8",
+        "symfony/phpunit-bridge": "2.8.50",
         "symfony/web-profiler-bundle": "2.8",
         "symfony/stopwatch": "2.8",
         "symfony/security-acl": "2.8",
